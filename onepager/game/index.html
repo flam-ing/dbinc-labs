@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>토끼 당근 피하기</title>
+<link rel="icon" href="data:,">
+<style>
+  :root {
+    --sky-1: #cfe9ff; --sky-2: #fff4e6; --grass: #9fd18b; --grass-2: #7fbf6a;
+    --ink: #1f2430; --muted: #5d6573; --orange: #ff6f0f; --white: #ffffff; --line: rgba(31, 36, 48, .12);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: #f3f6fa; color: var(--ink); font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
+  body { display: flex; justify-content: center; }
+  .app { width: 100%; max-width: 760px; height: 100%; display: flex; flex-direction: column; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); gap: 8px; }
+  .top { display: flex; align-items: center; gap: 12px; }
+  .top h1 { font-size: 20px; margin: 0; flex: 1; letter-spacing: -.02em; }
+  .score { font-size: 28px; font-weight: 800; font-variant-numeric: tabular-nums; min-width: 92px; text-align: right; }
+  .score small { font-size: 14px; color: var(--muted); font-weight: 600; margin-left: 2px; }
+  .lives { display: flex; gap: 4px; }
+  .lives i { width: 16px; height: 16px; border-radius: 50%; background: var(--orange); display: block; }
+  .lives i.off { background: #d5dae2; }
+  button { font: inherit; cursor: pointer; }
+  .sound { border: 2px solid var(--line); background: var(--white); border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 700; }
+  .sound:disabled { color: #9aa1ad; cursor: default; }
+  .stage { position: relative; flex: 1; min-height: 280px; border-radius: 18px; overflow: hidden; background: linear-gradient(var(--sky-1), var(--sky-2)); touch-action: none; user-select: none; }
+  canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .overlay { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 20px; background: rgba(255, 255, 255, .82); }
+  .overlay[hidden] { display: none; }
+  .overlay h2 { margin: 0; font-size: 34px; letter-spacing: -.03em; }
+  .overlay p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.5; }
+  .overlay .big { font-size: 22px; font-weight: 800; color: var(--ink); }
+  .start-screen { background: #fff7ef; }
+  .start-screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #fff7ef; }
+  .start-screen .card { position: relative; margin-top: auto; margin-bottom: 10px; background: rgba(255, 255, 255, .9); border-radius: 18px; padding: 14px 22px; box-shadow: 0 8px 30px rgba(0, 0, 0, .12); }
+  .start-screen.no-poster .card { margin-top: 0; }
+  .primary { border: 0; border-radius: 999px; background: var(--orange); color: #fff; font-size: 22px; font-weight: 800; padding: 12px 36px; box-shadow: 0 6px 0 #d85a06; }
+  .primary:active { transform: translateY(3px); box-shadow: 0 3px 0 #d85a06; }
+  .clear-screen { background: rgba(20, 24, 33, .92); color: #fff; }
+  .clear-screen p { color: #d6dbe4; }
+  .clear-screen video { width: min(100%, 560px); aspect-ratio: 16 / 9; height: auto; max-height: 55%; object-fit: cover; border-radius: 14px; background: #000; }
+  .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .controls button { height: 64px; border: 2px solid var(--line); border-radius: 16px; background: var(--white); display: flex; align-items: center; justify-content: center; }
+  .controls button.on { background: #fff1e6; border-color: var(--orange); }
+  .controls svg { width: 28px; height: 28px; fill: var(--ink); }
+  .status { font-size: 13px; color: var(--muted); text-align: center; }
+  @media (max-width: 480px) {
+    .top { gap: 8px; }
+    .top h1 { font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    .lives i { width: 12px; height: 12px; }
+    .score { font-size: 22px; min-width: 0; }
+    .sound { padding: 5px 10px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <h1>토끼 당근 피하기</h1>
+    <div class="lives" id="lives" aria-label="목숨"></div>
+    <div class="score" aria-live="polite"><span id="score">0</span><small>/ 300점</small></div>
+    <button class="sound" id="sound" type="button" disabled>음악 없음</button>
+  </div>
+
+  <div class="stage" id="stage">
+    <canvas id="game" aria-label="게임 화면. 왼쪽 오른쪽 화살표 키나 아래 버튼, 끌기로 토끼를 움직여요."></canvas>
+
+    <div class="overlay start-screen" id="start">
+      <img id="poster" alt="게임 포스터" hidden>
+      <div class="card">
+        <h2>토끼 당근 피하기</h2>
+        <p>떨어지는 당근을 피해서 300점을 모아요.<br>키보드 ←→, 아래 버튼, 끌기로 움직여요.</p>
+        <p><button class="primary" id="play" type="button">시작</button></p>
+      </div>
+    </div>
+
+    <div class="overlay" id="over" hidden>
+      <h2>게임 오버</h2>
+      <p class="big" id="over-score">0점</p>
+      <p>당근에 다섯 번 부딪혔어요.</p>
+      <button class="primary" id="again" type="button">다시 하기</button>
+    </div>
+
+    <div class="overlay clear-screen" id="clear" hidden>
+      <h2>축하해요! 클리어</h2>
+      <video id="ending" playsinline preload="metadata" hidden></video>
+      <p id="clear-note">300점을 모았어요.</p>
+      <button class="primary" id="again2" type="button">다시 하기</button>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button type="button" id="left" aria-label="왼쪽으로"><svg viewBox="0 0 24 24"><path d="M16 4 L6 12 L16 20 Z"/></svg></button>
+    <button type="button" id="right" aria-label="오른쪽으로"><svg viewBox="0 0 24 24"><path d="M8 4 L18 12 L8 20 Z"/></svg></button>
+  </div>
+  <p class="status" id="media-status">포스터 확인 중 · 음악 확인 중 · 영상 확인 중</p>
+</div>
+
+<script>
+// 미디어 파일 계약: 이 세 경로만 찾아요. 없으면 그 기능만 건너뛰어요.
+const MEDIA = { poster: 'media/poster.png', music: 'media/music.mp3', ending: 'media/ending.mp4' };
+
+// 게임 규칙
+const RULES = {
+  goal: 300,            // 300점이면 클리어
+  pointsPerSecond: 20,  // 1초에 20점
+  lives: 5,             // 목숨 5개
+  invincibleMs: 1500,   // 부딪히면 1.5초 동안 무적
+  fallSpeed: [150, 230],// 당근이 떨어지는 속도(화면 높이 600 기준, 1초에 움직이는 거리)
+  spawnMs: 900          // 당근이 새로 생기는 간격
+};
+
+const $ = (id) => document.getElementById(id);
+const canvas = $('game');
+const ctx = canvas.getContext('2d');
+const stage = $('stage');
+const status = { poster: '확인 중', music: '확인 중', ending: '확인 중' };
+const LABEL = { poster: '포스터', music: '음악', ending: '영상' };
+
+let W = 0, H = 0, scale = 1;
+let state = 'start';  // start, play, over, clear
+let rabbit, carrots, score, lives, hitUntil, lastSpawn, lastTime, keys, dragX;
+let musicOn = true;
+let music = null;
+
+function showStatus() {
+  $('media-status').textContent = Object.keys(status).map((k) => `${LABEL[k]} ${status[k]}`).join(' · ');
+}
+
+// ---------- 미디어 불러오기 (없어도 오류 없이 넘어가요) ----------
+function loadPoster() {
+  const img = $('poster');
+  img.addEventListener('load', () => { status.poster = '있음'; img.hidden = false; showStatus(); });
+  img.addEventListener('error', () => { status.poster = '없음'; $('start').classList.add('no-poster'); showStatus(); });
+  img.src = MEDIA.poster;
+}
+
+function loadMusic() {
+  try {
+    const audio = new Audio();
+    audio.loop = true;
+    audio.preload = 'auto';
+    audio.volume = 0.5;
+    audio.addEventListener('canplaythrough', () => {
+      if (status.music === '있음') return;
+      status.music = '있음';
+      music = audio;
+      $('sound').disabled = false;
+      $('sound').textContent = musicOn ? '음악 끄기' : '음악 켜기';
+      showStatus();
+    });
+    audio.addEventListener('error', () => { status.music = '없음'; music = null; showStatus(); });
+    audio.src = MEDIA.music;
+    audio.load();
+  } catch (e) {
+    status.music = '없음';
+    showStatus();
+  }
+}
+
+function loadEnding() {
+  const video = $('ending');
+  video.addEventListener('loadeddata', () => { status.ending = '있음'; showStatus(); });
+  video.addEventListener('error', () => { status.ending = '없음'; video.hidden = true; showStatus(); });
+  video.src = MEDIA.ending;
+  video.load();
+}
+
+function playMusic() {
+  if (!music || !musicOn) return;
+  const p = music.play();
+  if (p && p.catch) p.catch(() => { /* 브라우저가 소리를 막으면 조용히 넘어가요 */ });
+}
+
+function stopMusic() {
+  if (music) music.pause();
+}
+
+$('sound').addEventListener('click', () => {
+  musicOn = !musicOn;
+  $('sound').textContent = musicOn ? '음악 끄기' : '음악 켜기';
+  if (musicOn && state === 'play') playMusic(); else stopMusic();
+});
+
+// ---------- 화면 크기 ----------
+function resize() {
+  const r = stage.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  W = r.width; H = r.height;
+  canvas.width = Math.round(W * dpr);
+  canvas.height = Math.round(H * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  scale = H / 600;
+  if (rabbit) rabbit.y = H - 70 * scale;
+  draw();
+}
+window.addEventListener('resize', resize);
+
+// ---------- 게임 ----------
+function reset() {
+  rabbit = { x: W / 2, y: H - 70 * scale, speed: 520 };
+  carrots = [];
+  score = 0;
+  lives = RULES.lives;
+  hitUntil = 0;
+  lastSpawn = 0;
+  keys = { left: false, right: false };
+  dragX = null;
+  updateHud();
+}
+
+function start() {
+  reset();
+  state = 'play';
+  ['start', 'over', 'clear'].forEach((id) => { $(id).hidden = true; });
+  const video = $('ending');
+  video.pause();
+  if (music) music.currentTime = 0;
+  playMusic();
+  lastTime = performance.now();
+  requestAnimationFrame(loop);
+}
+
+function updateHud() {
+  $('score').textContent = Math.floor(score);
+  $('lives').innerHTML = Array.from({ length: RULES.lives }, (_, i) => `<i class="${i < lives ? '' : 'off'}"></i>`).join('');
+}
+
+function spawn(now) {
+  const size = (34 + Math.random() * 10) * scale;
+  const [lo, hi] = RULES.fallSpeed;
+  carrots.push({ x: size + Math.random() * (W - size * 2), y: -size, size, speed: (lo + Math.random() * (hi - lo)) * scale, tilt: (Math.random() - 0.5) * 0.6 });
+  lastSpawn = now;
+}
+
+function loop(now) {
+  if (state !== 'play') return;
+  const dt = Math.min(0.05, (now - lastTime) / 1000);
+  lastTime = now;
+
+  // 움직이기
+  const dir = (keys.right ? 1 : 0) - (keys.left ? 1 : 0);
+  if (dragX != null) rabbit.x += (dragX - rabbit.x) * Math.min(1, dt * 14);
+  else rabbit.x += dir * rabbit.speed * scale * dt;
+  const half = 34 * scale;
+  rabbit.x = Math.max(half, Math.min(W - half, rabbit.x));
+
+  // 당근
+  if (now - lastSpawn > RULES.spawnMs) spawn(now);
+  carrots.forEach((c) => { c.y += c.speed * dt; });
+  carrots = carrots.filter((c) => c.y < H + c.size);
+
+  // 부딪힘: 판정은 그림보다 작게 잡아서 너그럽게
+  if (now > hitUntil) {
+    for (const c of carrots) {
+      const dx = c.x - rabbit.x, dy = c.y - (rabbit.y - 10 * scale);
+      if (Math.abs(dx) < 26 * scale && Math.abs(dy) < 34 * scale) {
+        lives -= 1;
+        hitUntil = now + RULES.invincibleMs;
+        c.y = H + 999;
+        updateHud();
+        if (lives <= 0) { endGame('over'); return; }
+        break;
+      }
+    }
+  }
+
+  // 점수
+  score += RULES.pointsPerSecond * dt;
+  if (score >= RULES.goal) { score = RULES.goal; updateHud(); endGame('clear'); return; }
+  $('score').textContent = Math.floor(score);
+
+  draw(now);
+  requestAnimationFrame(loop);
+}
+
+function endGame(kind) {
+  state = kind;
+  stopMusic();
+  draw();
+  if (kind === 'over') {
+    $('over-score').textContent = Math.floor(score) + '점';
+    $('over').hidden = false;
+    return;
+  }
+  $('clear').hidden = false;
+  const video = $('ending');
+  if (status.ending === '있음') {
+    video.hidden = false;
+    video.currentTime = 0;
+    $('clear-note').textContent = '300점을 모았어요. 엔딩 영상이 나와요.';
+    const p = video.play();
+    if (p && p.catch) p.catch(() => { video.controls = true; });
+  } else {
+    video.hidden = true;
+    $('clear-note').textContent = '300점을 모았어요.';
+  }
+}
+
+// ---------- 그리기 (도형으로만) ----------
+function draw(now = performance.now()) {
+  if (!W) return;
+  ctx.clearRect(0, 0, W, H);
+  // 언덕
+  ctx.fillStyle = '#b8e0a6';
+  ctx.beginPath(); ctx.ellipse(W * 0.2, H + 30 * scale, W * 0.5, 120 * scale, 0, Math.PI, 0); ctx.fill();
+  ctx.fillStyle = '#a5d693';
+  ctx.beginPath(); ctx.ellipse(W * 0.85, H + 40 * scale, W * 0.45, 110 * scale, 0, Math.PI, 0); ctx.fill();
+  // 해
+  ctx.fillStyle = '#ffb36b';
+  ctx.beginPath(); ctx.arc(W - 70 * scale, 80 * scale, 34 * scale, 0, Math.PI * 2); ctx.fill();
+  if (!rabbit) return;
+  (carrots || []).forEach(drawCarrot);
+  const blink = now < hitUntil && Math.floor(now / 120) % 2 === 0;
+  if (!blink) drawRabbit(rabbit.x, rabbit.y, scale);
+}
+
+function drawCarrot(c) {
+  const s = c.size;
+  ctx.save();
+  ctx.translate(c.x, c.y);
+  ctx.rotate(c.tilt);
+  ctx.fillStyle = '#4caf50';
+  ctx.beginPath(); ctx.ellipse(-s * 0.18, -s * 0.62, s * 0.12, s * 0.3, -0.4, 0, Math.PI * 2); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(s * 0.18, -s * 0.62, s * 0.12, s * 0.3, 0.4, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = '#ff7a1a';
+  ctx.beginPath();
+  ctx.moveTo(-s * 0.36, -s * 0.42);
+  ctx.quadraticCurveTo(0, -s * 0.62, s * 0.36, -s * 0.42);
+  ctx.lineTo(0, s * 0.62);
+  ctx.closePath(); ctx.fill();
+  ctx.strokeStyle = 'rgba(160, 60, 0, .45)'; ctx.lineWidth = Math.max(1, s * 0.05);
+  ctx.beginPath(); ctx.moveTo(-s * 0.18, -s * 0.1); ctx.lineTo(s * 0.02, -s * 0.06); ctx.moveTo(-s * 0.06, s * 0.18); ctx.lineTo(s * 0.12, s * 0.2); ctx.stroke();
+  ctx.restore();
+}
+
+function drawRabbit(x, y, k) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.scale(k, k);
+  // 그림자
+  ctx.fillStyle = 'rgba(0, 0, 0, .12)';
+  ctx.beginPath(); ctx.ellipse(0, 46, 34, 8, 0, 0, Math.PI * 2); ctx.fill();
+  // 귀
+  ctx.fillStyle = '#ffffff'; ctx.strokeStyle = '#d9dee6'; ctx.lineWidth = 2;
+  [[-12, -0.18], [12, 0.18]].forEach(([ex, r]) => {
+    ctx.save(); ctx.translate(ex, -40); ctx.rotate(r);
+    ctx.beginPath(); ctx.ellipse(0, -22, 9, 26, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#ffb38a'; ctx.beginPath(); ctx.ellipse(0, -20, 4.5, 18, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.restore(); ctx.fillStyle = '#ffffff';
+  });
+  // 몸통과 머리
+  ctx.beginPath(); ctx.ellipse(0, 18, 30, 28, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, -22, 22, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  // 눈, 코, 볼
+  ctx.fillStyle = '#1f2430';
+  ctx.beginPath(); ctx.arc(-8, -25, 3, 0, Math.PI * 2); ctx.arc(8, -25, 3, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = '#ff6f0f';
+  ctx.beginPath(); ctx.arc(0, -16, 3.2, 0, Math.PI * 2); ctx.fill();
+  ctx.fillStyle = 'rgba(255, 140, 120, .35)';
+  ctx.beginPath(); ctx.arc(-14, -14, 4.5, 0, Math.PI * 2); ctx.arc(14, -14, 4.5, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+}
+
+// ---------- 조작: 키보드, 아래 버튼, 끌기 ----------
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft' || e.key === 'a') { keys.left = true; e.preventDefault(); }
+  if (e.key === 'ArrowRight' || e.key === 'd') { keys.right = true; e.preventDefault(); }
+  if ((e.key === 'Enter' || e.key === ' ') && state !== 'play') { e.preventDefault(); start(); }
+});
+window.addEventListener('keyup', (e) => {
+  if (e.key === 'ArrowLeft' || e.key === 'a') keys.left = false;
+  if (e.key === 'ArrowRight' || e.key === 'd') keys.right = false;
+});
+
+function hold(btn, side) {
+  const on = (e) => { e.preventDefault(); if (keys) keys[side] = true; btn.classList.add('on'); };
+  const off = () => { if (keys) keys[side] = false; btn.classList.remove('on'); };
+  btn.addEventListener('pointerdown', on);
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach((t) => btn.addEventListener(t, off));
+}
+hold($('left'), 'left');
+hold($('right'), 'right');
+
+stage.addEventListener('pointerdown', (e) => {
+  if (state !== 'play') return;
+  dragX = e.clientX - stage.getBoundingClientRect().left;
+  stage.setPointerCapture(e.pointerId);
+});
+stage.addEventListener('pointermove', (e) => {
+  if (state !== 'play' || dragX == null) return;
+  dragX = e.clientX - stage.getBoundingClientRect().left;
+});
+['pointerup', 'pointercancel'].forEach((t) => stage.addEventListener(t, () => { dragX = null; }));
+
+$('play').addEventListener('click', start);
+$('again').addEventListener('click', start);
+$('again2').addEventListener('click', start);
+
+// ---------- 시작 ----------
+showStatus();
+loadPoster();
+loadMusic();
+loadEnding();
+resize();
+reset();
+draw();
+</script>
+</body>
+</html>

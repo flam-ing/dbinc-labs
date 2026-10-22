@@ -1,0 +1,18 @@
+{
+  "req_id": "BT-2019-0114",
+  "emp_no": "N2877",
+  "name": "서준호",
+  "dept": "해외영업팀",
+  "grade": "과장",
+  "trip_type": "OVERSEAS",
+  "city": "런던",
+  "purpose": "영국 전시회 참가",
+  "depart": "2019-07-01",
+  "return": "2019-07-05",
+  "submitted": "2019-07-09",
+  "receipts": [
+    {"type": "AIR", "date": "2019-06-10", "amount": 1530000, "currency": "KRW", "desc": "왕복 항공권"},
+    {"type": "HOTEL", "date": "2019-07-05", "amount": 620.00, "currency": "GBP", "desc": "4박"},
+    {"type": "TRAIN", "date": "2019-07-02", "amount": 38.50, "currency": "GBP", "desc": "히드로 익스프레스"}
+  ]
+}

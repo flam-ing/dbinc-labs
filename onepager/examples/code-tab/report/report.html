@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>주간 판매 보고서</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1c2430; --ink2:#5b6675; --line:#e3e7ec; --bar:#2f6fdb; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14181e; --card:#1d232c; --ink:#e8ecf1; --ink2:#9aa6b5; --line:#2e3744; --bar:#6a9bf0; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; padding:32px 20px; background:var(--bg); color:var(--ink);
+         font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
+  main { max-width:880px; margin:0 auto; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .sub { color:var(--ink2); font-size:13px; margin-bottom:24px; }
+  .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:16px; }
+  .card, section { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px; }
+  .card .label { color:var(--ink2); font-size:13px; }
+  .card .value { font-size:26px; font-weight:700; margin-top:6px; }
+  .card .note { color:var(--ink2); font-size:12px; margin-top:2px; }
+  section { margin-bottom:16px; }
+  h2 { font-size:15px; margin:0 0 14px; }
+  .row { display:grid; grid-template-columns:120px 1fr 80px; align-items:center; gap:10px; margin:8px 0; font-size:13px; }
+  .track { height:18px; }
+  .bar { height:100%; background:var(--bar); border-radius:0 4px 4px 0; }
+  .row:hover .bar { filter:brightness(1.15); }
+  .num { text-align:right; font-variant-numeric:tabular-nums; }
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  th, td { padding:8px 10px; border-bottom:1px solid var(--line); text-align:left; }
+  th { color:var(--ink2); font-weight:600; }
+  td.r, th.r { text-align:right; font-variant-numeric:tabular-nums; }
+  tfoot td { font-weight:700; border-bottom:0; }
+  @media (max-width:640px) { .cards { grid-template-columns:1fr; } .row { grid-template-columns:90px 1fr 70px; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>주간 판매 보고서</h1>
+  <div class="sub">2026-10-01 ~ 2026-10-03 · 출처: orders.csv</div>
+
+  <div class="cards">
+    <div class="card"><div class="label">총 매출</div><div class="value">89,000원</div></div>
+    <div class="card"><div class="label">주문 수</div><div class="value">5건</div></div>
+    <div class="card"><div class="label">가장 많이 팔린 상품</div><div class="value">녹차 50T</div><div class="note">매출 26,000원 · 4개</div></div>
+  </div>
+
+  <section>
+    <h2>상품별 매출</h2>
+    <div class="row" title="녹차 50T: 26,000원"><span>녹차 50T</span><div class="track"><div class="bar" style="width:100%"></div></div><span class="num">26,000원</span></div>
+    <div class="row" title="세제 3L: 25,800원"><span>세제 3L</span><div class="track"><div class="bar" style="width:99.2%"></div></div><span class="num">25,800원</span></div>
+    <div class="row" title="생수 2L 6입: 18,000원"><span>생수 2L 6입</span><div class="track"><div class="bar" style="width:69.2%"></div></div><span class="num">18,000원</span></div>
+    <div class="row" title="커피믹스 100T: 12,000원"><span>커피믹스 100T</span><div class="track"><div class="bar" style="width:46.2%"></div></div><span class="num">12,000원</span></div>
+    <div class="row" title="건전지 AA 8입: 7,200원"><span>건전지 AA 8입</span><div class="track"><div class="bar" style="width:27.7%"></div></div><span class="num">7,200원</span></div>
+  </section>
+
+  <section>
+    <h2>주문 내역</h2>
+    <table>
+      <thead><tr><th>날짜</th><th>매장</th><th>상품</th><th class="r">수량</th><th class="r">금액</th></tr></thead>
+      <tbody>
+        <tr><td>2026-10-01</td><td>강남점</td><td>생수 2L 6입</td><td class="r">3</td><td class="r">18,000원</td></tr>
+        <tr><td>2026-10-01</td><td>강남점</td><td>커피믹스 100T</td><td class="r">1</td><td class="r">12,000원</td></tr>
+        <tr><td>2026-10-02</td><td>판교점</td><td>세제 3L</td><td class="r">2</td><td class="r">25,800원</td></tr>
+        <tr><td>2026-10-02</td><td>판교점</td><td>녹차 50T</td><td class="r">4</td><td class="r">26,000원</td></tr>
+        <tr><td>2026-10-03</td><td>강남점</td><td>건전지 AA 8입</td><td class="r">1</td><td class="r">7,200원</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="3">합계</td><td class="r">11</td><td class="r">89,000원</td></tr></tfoot>
+    </table>
+  </section>
+</main>
+</body>
+</html>

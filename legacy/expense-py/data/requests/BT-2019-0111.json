@@ -1,0 +1,20 @@
+{
+  "req_id": "BT-2019-0111",
+  "emp_no": "N3014",
+  "name": "장수아",
+  "dept": "구매팀",
+  "grade": "과장",
+  "trip_type": "OVERSEAS",
+  "city": "하노이",
+  "purpose": "현지 협력사 공장 방문",
+  "depart": "2019-07-08",
+  "return": "2019-07-11",
+  "submitted": "2019-07-12",
+  "receipts": [
+    {"type": "HOTEL", "date": "2019-07-11", "amount": 285.00, "currency": "USD", "desc": "3박"},
+    {"type": "TAXI", "date": "2019-07-09", "amount": 18.40, "currency": "USD", "desc": "공장 이동"},
+    {"type": "MEAL", "date": "2019-07-10", "amount": 48.00, "currency": "USD", "desc": "협력사 점심"},
+    {"type": "ETC", "date": "2019-07-10", "amount": 20.00, "currency": "USD", "receipt": false, "desc": "통역 기사 팁"}
+  ],
+  "memo": "항공권은 법인카드로 결제했어요. 현지 공장 & 협력사 미팅 <일정 하루 단축>"
+}

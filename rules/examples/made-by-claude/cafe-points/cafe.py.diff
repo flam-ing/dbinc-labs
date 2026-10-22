@@ -1,0 +1,26 @@
+diff --git a/cafe.py b/cafe.py
+index 13dfd8c..28d6583 100644
+--- a/cafe.py
++++ b/cafe.py
+@@ -82,7 +82,7 @@ class LoyaltyPolicy:
+         is_birthday = self.claim_birthday_coupon(order, member, amount)
+         coupon = config.BIRTHDAY_COUPON if is_birthday else 0
+         paid = amount - coupon - use_points
+-        earned = self.earned_points(order["date"], member, amount, paid, is_birthday)
++        earned = self.earned_points(order["date"], member, paid)
+         balance = balance - use_points + earned
+         member["points"] = str(balance)
+         member["total"] = str(int(member["total"]) + paid)
+@@ -128,10 +128,8 @@ class LoyaltyPolicy:
+             self.used_coupons.append(coupon_key)
+         return is_birthday
+ 
+-    def earned_points(self, date, member, amount, paid, is_birthday):
+-        # CAFE-5: 생일 쿠폰을 쓴 날은 쿠폰 차감 전 금액으로 적립한다(정책 확정 전이라 그대로 둠)
+-        earn_base = amount if is_birthday else paid
+-        earned = int(earn_base * config.point_rates(date)[member["grade"]])
++    def earned_points(self, date, member, paid):
++        earned = int(paid * config.point_rates(date)[member["grade"]])
+         if date == config.CHRISTMAS_DATE:
+             earned = earned * config.CHRISTMAS_MULTIPLIER  # 크리스마스 이벤트
+         return earned

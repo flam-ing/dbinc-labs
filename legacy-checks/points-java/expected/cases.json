@@ -1,0 +1,99 @@
+{
+  "about": "src/의 원본 Java 코드를 실제로 실행해서 기록한 결과예요. 고치지 않아요.",
+  "recorded_with": "openjdk version \"21.0.12.1\" 2026-08-18 LTS / javac와 java, 옵션 -Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8",
+  "java_main": "com.nuri.mall.point.PointBatch",
+  "contract": {
+    "실행": "<프로그램> <거래 CSV> <회원 CSV> <기준일 yyyy-MM-dd> <알림 폴더>   (실행 위치는 이 폴더, 경로는 이 폴더 기준)",
+    "입력": "두 CSV 모두 UTF-8이고 첫 줄은 머리글이에요. 거래: tx_id,member_id,tx_dt(yyyy-MM-dd HH:mm:ss),type(BUY, USE, CANCEL, ADJ),amount,order_no. 회원: member_id,name,grade,email,join_dt,ad_agree",
+    "출력": "표준 출력(UTF-8)에 요약과 회원별 표가 나오고, 알림 폴더에 알림 파일(EXP_로 시작하면 소멸 예정 안내, CS_로 시작하면 CS팀 확인 요청)이 생겨요.",
+    "종료 코드": "0 정상, 2 입력 파일을 읽을 수 없음",
+    "비교": "표준 출력, 종료 코드, 알림 폴더의 파일 이름과 내용을 비교해요. verify.py는 {out}을 actual/<사례>/out으로 바꿔서 넘겨요. 줄바꿈 차이와 맨 끝 빈 줄은 무시해요."
+  },
+  "cases": [
+    {
+      "name": "jan31",
+      "note": "손으로 만든 거래 46줄, 기준일 2017-01-31. 중복, 없는 회원, 형식 오류, 프로모션 마지막 날, 윤년 2월 29일이 섞여 있어요.",
+      "args": [
+        "data/transactions.csv",
+        "data/members.csv",
+        "2017-01-31",
+        "{out}/outbox"
+      ],
+      "exit": 0,
+      "stdout": "jan31/stdout.txt",
+      "files": "jan31/out"
+    },
+    {
+      "name": "mar01",
+      "note": "같은 거래, 기준일 2017-03-01. 1월과 2월 말 소멸분이 사라지고 3월 말 소멸 예정 안내가 나가요.",
+      "args": [
+        "data/transactions.csv",
+        "data/members.csv",
+        "2017-03-01",
+        "{out}/outbox"
+      ],
+      "exit": 0,
+      "stdout": "mar01/stdout.txt",
+      "files": "mar01/out"
+    },
+    {
+      "name": "oct07",
+      "note": "같은 거래, 기준일 2016-10-07(창립 기념 주간 마지막 날). 기준일 뒤 거래는 빠져요.",
+      "args": [
+        "data/transactions.csv",
+        "data/members.csv",
+        "2016-10-07",
+        "{out}/outbox"
+      ],
+      "exit": 0,
+      "stdout": "oct07/stdout.txt",
+      "files": "oct07/out"
+    },
+    {
+      "name": "year",
+      "note": "회원 40명, 거래 770줄(2015-07~2017-07), 기준일 2017-06-30.",
+      "args": [
+        "data/year/transactions.csv",
+        "data/year/members.csv",
+        "2017-06-30",
+        "{out}/outbox"
+      ],
+      "exit": 0,
+      "stdout": "year/stdout.txt",
+      "files": "year/out"
+    },
+    {
+      "name": "empty-tx",
+      "note": "머리글만 있는 거래 파일이에요.",
+      "args": [
+        "data/empty-tx.csv",
+        "data/members.csv",
+        "2017-01-31",
+        "{out}/outbox"
+      ],
+      "exit": 0,
+      "stdout": "empty-tx/stdout.txt",
+      "files": "empty-tx/out"
+    },
+    {
+      "name": "missing-members",
+      "note": "회원 파일이 없을 때예요.",
+      "args": [
+        "data/transactions.csv",
+        "data/none.csv",
+        "2017-01-31",
+        "{out}/outbox"
+      ],
+      "exit": 2,
+      "stdout": "missing-members/stdout.txt",
+      "files": "missing-members/out"
+    },
+    {
+      "name": "no-args",
+      "note": "인자 없이 실행했을 때예요. 코드에 박힌 기본 경로를 읽으려다 실패해요.",
+      "args": [],
+      "exit": 2,
+      "stdout": "no-args/stdout.txt"
+    }
+  ]
+}

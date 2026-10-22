@@ -1,0 +1,1 @@
+사용법: python expense_batch.py <신청서 폴더> <환율 json> <정산일 YYYY-MM-DD> [출력 폴더]

@@ -1,0 +1,48 @@
+# 온콜 자동 처리
+# 이슈에 autofix 라벨이 붙거나, 이슈 댓글에 @claude가 있으면
+# GitHub 서버(Actions 러너)에서 Claude Code가 이 저장소를 받아 일해요. 내 PC는 꺼져 있어도 돼요.
+# 라벨 붙이기와 @claude 부르기는 저장소에 쓰기 권한이 있는 사람만 할 수 있어요.
+name: Claude 온콜
+
+on:
+  issues:
+    types: [labeled]
+  issue_comment:
+    types: [created]
+
+# 같은 이슈에서 여러 번 불러도 한 번에 하나씩만 돌아요.
+concurrency:
+  group: claude-issue-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  claude:
+    if: >-
+      (github.event_name == 'issues' && github.event.label.name == 'autofix') ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+      actions: read
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          # Claude 구독으로 만든 토큰(claude setup-token)을 저장소 비밀값에 넣어 써요.
+          # 회사 API 키를 쓰면 이 줄 대신 anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }} 를 써요.
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          label_trigger: autofix
+          claude_args: |
+            --max-turns 30
+            --allowedTools "Bash(python3 -m unittest),Bash(python3 -m unittest *),Bash(python -m unittest),Bash(python -m unittest *),Bash(python3 app.py *),Bash(curl *)"

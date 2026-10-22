@@ -1,0 +1,7 @@
+# javac로 직접 컴파일할 때 생기는 결과
+/classes/
+/out/
+/build/
+*.class
+# 다른 언어로 옮길 때 생기는 캐시
+__pycache__/

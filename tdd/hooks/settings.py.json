@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/gate.py\" --cwd py -- python3 -m unittest -q",
+            "timeout": 300
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/gate.py\" --cwd py -- python3 -m unittest -q",
+            "timeout": 300
+          }
+        ]
+      }
+    ]
+  }
+}

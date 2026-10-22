@@ -1,0 +1,119 @@
+{
+  "about": "원본 src/를 실제로 실행해서 기록한 표준 출력과 종료 코드예요. 고치지 않아요.",
+  "program": "java nuri.pay.PayMain <직원 CSV> <근태 CSV> <대상월 yyyy-MM>",
+  "recorded_with": "openjdk version \"21.0.12.1\" 2026-08-18 LTS, java -Dfile.encoding=UTF-8 -Dstdout.encoding=UTF-8",
+  "compare": "표준 출력(줄바꿈 CRLF와 LF는 같게 봐요)과 종료 코드. stderr는 비교하지 않아요.",
+  "cases": [
+    {
+      "name": "oct",
+      "args": [
+        "data/employees.csv",
+        "data/attendance-2021-10.csv",
+        "2021-10"
+      ],
+      "inputs": [
+        "data/employees.csv",
+        "data/attendance-2021-10.csv"
+      ],
+      "stdout": "oct.txt",
+      "exit": 0,
+      "note": "2021년 10월, 상여를 주는 달이에요. 중복 사번, 일할 계산, 근태 경고, 상여 제외가 모두 나와요."
+    },
+    {
+      "name": "sep",
+      "args": [
+        "data/employees.csv",
+        "data/attendance-2021-09.csv",
+        "2021-09"
+      ],
+      "inputs": [
+        "data/employees.csv",
+        "data/attendance-2021-09.csv"
+      ],
+      "stdout": "sep.txt",
+      "exit": 0,
+      "note": "2021년 9월, 상여가 없는 달이에요. 추석 휴일근무와 야간 교대가 있어요."
+    },
+    {
+      "name": "nov",
+      "args": [
+        "data/employees.csv",
+        "data/attendance-2021-10.csv",
+        "2021-11"
+      ],
+      "inputs": [
+        "data/employees.csv",
+        "data/attendance-2021-10.csv"
+      ],
+      "stdout": "nov.txt",
+      "exit": 0,
+      "note": "2021년 11월이에요. 근태 파일은 10월 것이라 연장·야간·휴일이 모두 0이에요."
+    },
+    {
+      "name": "jan",
+      "args": [
+        "data/employees.csv",
+        "data/attendance-2021-10.csv",
+        "2022-01"
+      ],
+      "inputs": [
+        "data/employees.csv",
+        "data/attendance-2021-10.csv"
+      ],
+      "stdout": "jan.txt",
+      "exit": 0,
+      "note": "2022년 1월, 상여를 주는 달이에요. 근태 기록은 없어요."
+    },
+    {
+      "name": "bad-month",
+      "args": [
+        "data/employees.csv",
+        "data/attendance-2021-10.csv",
+        "2021-13"
+      ],
+      "inputs": [
+        "data/employees.csv",
+        "data/attendance-2021-10.csv"
+      ],
+      "stdout": "bad-month.txt",
+      "exit": 1,
+      "note": "대상월이 13월일 때."
+    },
+    {
+      "name": "missing-emp",
+      "args": [
+        "data/none.csv",
+        "data/attendance-2021-10.csv",
+        "2021-10"
+      ],
+      "inputs": [
+        "data/attendance-2021-10.csv"
+      ],
+      "stdout": "missing-emp.txt",
+      "exit": 2,
+      "note": "직원 파일이 없을 때."
+    },
+    {
+      "name": "missing-att",
+      "args": [
+        "data/employees.csv",
+        "data/none.csv",
+        "2021-10"
+      ],
+      "inputs": [
+        "data/employees.csv"
+      ],
+      "stdout": "missing-att.txt",
+      "exit": 1,
+      "note": "근태 파일이 없을 때. 원본은 예외로 끝나서 종료 코드가 1이에요. stderr의 예외 내용은 비교하지 않아요."
+    },
+    {
+      "name": "no-args",
+      "args": [],
+      "inputs": [],
+      "stdout": "no-args.txt",
+      "exit": 1,
+      "note": "인자 없이 실행했을 때."
+    }
+  ]
+}

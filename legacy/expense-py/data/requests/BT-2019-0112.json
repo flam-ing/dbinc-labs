@@ -1,0 +1,21 @@
+{
+  "req_id": "BT-2019-0112",
+  "emp_no": "N2290",
+  "name": "임도윤",
+  "dept": "물류팀",
+  "grade": "차장",
+  "trip_type": "DOMESTIC",
+  "city": "부산",
+  "purpose": "부산 창고 이전 준비",
+  "depart": "2019-06-17",
+  "return": "2019-06-21",
+  "submitted": "2019-06-24",
+  "receipts": [
+    {"type": "TRAIN", "date": "2019-06-17", "amount": 59800, "currency": "KRW", "desc": "KTX 서울-부산"},
+    {"type": "HOTEL", "date": "2019-06-21", "amount": 380000, "currency": "KRW", "desc": "4박"},
+    {"type": "CAR", "date": "2019-06-21", "amount": 312000, "currency": "KRW", "desc": "렌터카 5일"},
+    {"type": "PARKING", "date": "2019-06-21", "amount": 35600, "currency": "KRW", "desc": "주차비"},
+    {"type": "TAXI", "date": "2019-06-19", "amount": 27800, "currency": "KRW", "receipt": false, "desc": "택시(영수증 없음)"},
+    {"type": "TRAIN", "date": "2019-06-21", "amount": 59800, "currency": "KRW", "desc": "KTX 부산-서울"}
+  ]
+}

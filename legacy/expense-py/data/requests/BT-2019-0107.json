@@ -1,0 +1,17 @@
+{
+  "req_id": "BT-2019-0107",
+  "emp_no": "N2731",
+  "name": "강서윤",
+  "dept": "영업1팀",
+  "grade": "대리",
+  "trip_type": "DOMESTIC",
+  "city": "광주",
+  "purpose": "광주 대리점 재고 실사",
+  "depart": "2019-07-05",
+  "return": "2019-07-03",
+  "submitted": "2019-07-08",
+  "receipts": [
+    {"type": "TRAIN", "date": "2019-07-03", "amount": 46800, "currency": "KRW", "desc": "KTX 왕복"},
+    {"type": "HOTEL", "date": "2019-07-04", "amount": 78000, "currency": "KRW", "desc": "1박"}
+  ]
+}

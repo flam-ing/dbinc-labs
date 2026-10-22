@@ -1,0 +1,19 @@
+--- labs/app/pwa/manifest.webmanifest
++++ web/public/manifest.webmanifest
+@@ -1,13 +1,13 @@
+ {
+-  "name": "DB Inc 교육 방명록",
+-  "short_name": "방명록",
++  "name": "고마워 릴레이",
++  "short_name": "고마워 릴레이",
+   "description": "1일차 4교시에 만든 방명록을 앱처럼 열어요. 교육용 예제예요.",
+   "lang": "ko",
+   "start_url": "/",
+   "scope": "/",
+   "display": "standalone",
+   "background_color": "#FFFCF8",
+-  "theme_color": "#FF6F0F",
++  "theme_color": "#2E7D32",
+   "icons": [
+     { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+     { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }

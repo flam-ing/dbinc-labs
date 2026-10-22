@@ -1,0 +1,14 @@
+diff --git a/CLAUDE.md b/CLAUDE.md
+index 97d3b19..14a3cc6 100644
+--- a/CLAUDE.md
++++ b/CLAUDE.md
+@@ -50,6 +50,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
+ - 비밀번호 같은 비밀값은 코드에 쓰지 않아요.
+ - 오류를 `except: pass`로 삼키지 않아요.
+ - 등급은 `grades.py`의 `Grade` enum으로만 다뤄요.
+-- 적립률, VIP 기준, 쿠폰 금액 같은 정책 숫자는 설정 한 곳에만 둬요.
++- 적립률, VIP 기준, 쿠폰 금액 같은 정책 숫자는 `config.py`에만 둬요. `config.py` 밖의 `.py` 파일에는 정책 숫자 리터럴이 없어야 해요(`grep -n` 으로 `cafe.py`, `grades.py`에서 적립률·금액 숫자가 나오지 않는지 확인해요).
++- 외부 패키지를 넣지 않아요. `.py` 파일의 import는 표준 라이브러리와 이 저장소의 모듈뿐이어야 하고, `requirements.txt`, `pyproject.toml` 같은 의존성 파일을 만들지 않아요.
++- 작업이 끝나면 저장소 루트에서 `python3 cafe.py`를 실행해 오류 없이 끝나는지, `out/members.csv`와 `out/report.txt`가 갱신됐는지 확인하고, 확인한 결과를 보고에 적어요.
+ - 화면 코드는 TypeScript(`.tsx`, `.ts`)로 통일하고, 컴포넌트 안에서 다른 컴포넌트를 만들지 않아요.
+ - 리팩터링은 동작을 바꾸지 않아요. 고치기 전과 뒤의 결과를 비교하고, 단계마다 커밋해요.

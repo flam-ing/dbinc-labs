@@ -1,0 +1,19 @@
+{
+  "req_id": "BT-2019-0113",
+  "emp_no": "N2604",
+  "name": "한서진",
+  "dept": "인사팀",
+  "grade": "대리",
+  "trip_type": "DOMESTIC",
+  "city": "대구",
+  "purpose": "지역 채용 설명회",
+  "depart": "2019-06-10",
+  "return": "2019-06-12",
+  "submitted": "2019-07-15",
+  "receipts": [
+    {"type": "TRAIN", "date": "2019-06-10", "amount": 43500, "currency": "KRW", "desc": "KTX 서울-동대구"},
+    {"type": "HOTEL", "date": "2019-06-12", "amount": 150000, "currency": "KRW", "desc": "2박"},
+    {"type": "TRAIN", "date": "2019-06-12", "amount": 43500, "currency": "KRW", "desc": "KTX 동대구-서울"}
+  ],
+  "memo": "늦게 올려서 죄송합니다."
+}

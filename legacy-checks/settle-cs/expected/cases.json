@@ -1,0 +1,63 @@
+{
+  "about": "src/의 원본 C#(DailySettle)을 실제로 실행해서 기록한 표준 출력과 종료 코드예요. 고치지 마세요.",
+  "recorded_with": ".NET SDK 8.0.426, Darwin arm64, 2026-10-16",
+  "how_to_compare": "사례마다 args를 실행 명령 뒤에 붙여서 이 폴더(verify.py가 있는 곳)에서 실행해요. 표준 출력은 UTF-8로 보고, 줄바꿈 \\r\\n과 \\n은 같게 봐요. 표준 오류는 비교하지 않아요.",
+  "cases": [
+    {
+      "name": "basic",
+      "args": ["data/orders.csv", "data/products.csv", "2006-04-03"],
+      "inputs": ["data/orders.csv", "data/products.csv"],
+      "stdout": "basic.txt",
+      "exit": 0,
+      "note": "손으로 만든 주문 32줄. 함정이 든 줄이 섞여 있어요."
+    },
+    {
+      "name": "next-day",
+      "args": ["data/orders.csv", "data/products.csv", "2006-04-04"],
+      "inputs": ["data/orders.csv", "data/products.csv"],
+      "stdout": "next-day.txt",
+      "exit": 0,
+      "note": "같은 파일, 다음 영업일. 전날 23시 이후 주문과 순매출이 음수인 매장이 나와요."
+    },
+    {
+      "name": "no-orders",
+      "args": ["data/orders.csv", "data/products.csv", "2006-04-10"],
+      "inputs": ["data/orders.csv", "data/products.csv"],
+      "stdout": "no-orders.txt",
+      "exit": 0,
+      "note": "주문이 없는 영업일. 표는 비고 재고 부족만 나와요."
+    },
+    {
+      "name": "many",
+      "args": ["data/many/orders.csv", "data/many/products.csv", "2006-04-03"],
+      "inputs": ["data/many/orders.csv", "data/many/products.csv"],
+      "stdout": "many.txt",
+      "exit": 0,
+      "note": "make_big.py로 만든 주문 2000줄(--seed 7)."
+    },
+    {
+      "name": "missing-orders",
+      "args": ["data/none.csv", "data/products.csv", "2006-04-03"],
+      "inputs": ["data/products.csv"],
+      "stdout": "missing-orders.txt",
+      "exit": 2,
+      "note": "주문 파일이 없을 때."
+    },
+    {
+      "name": "missing-products",
+      "args": ["data/orders.csv", "data/none.csv", "2006-04-03"],
+      "inputs": ["data/orders.csv"],
+      "stdout": "missing-products.txt",
+      "exit": 2,
+      "note": "상품 파일이 없을 때."
+    },
+    {
+      "name": "no-args",
+      "args": [],
+      "inputs": [],
+      "stdout": "no-args.txt",
+      "exit": 1,
+      "note": "인자 없이 실행했을 때."
+    }
+  ]
+}

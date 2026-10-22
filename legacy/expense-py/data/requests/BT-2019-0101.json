@@ -1,0 +1,20 @@
+{
+  "req_id": "BT-2019-0101",
+  "emp_no": "N1043",
+  "name": "김민준",
+  "dept": "영업2팀",
+  "grade": "대리",
+  "trip_type": "DOMESTIC",
+  "city": "부산",
+  "purpose": "부산 물류센터 납품 협의",
+  "depart": "2019-06-24",
+  "return": "2019-06-26",
+  "submitted": "2019-06-28",
+  "receipts": [
+    {"type": "TRAIN", "date": "2019-06-24", "amount": 59800, "currency": "KRW", "desc": "KTX 서울-부산"},
+    {"type": "HOTEL", "date": "2019-06-26", "amount": 168000, "currency": "KRW", "desc": "2박"},
+    {"type": "TAXI", "date": "2019-06-25", "amount": 15300, "currency": "KRW", "desc": "거래처 이동"},
+    {"type": "MEAL", "date": "2019-06-25", "amount": 23000, "currency": "KRW", "receipt": false, "desc": "현장 식대(영수증 분실)"},
+    {"type": "TRAIN", "date": "2019-06-26", "amount": 59800, "currency": "KRW", "desc": "KTX 부산-서울"}
+  ]
+}

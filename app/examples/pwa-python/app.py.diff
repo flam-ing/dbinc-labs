@@ -1,0 +1,16 @@
+diff --git a/app.py b/app.py
+index c6396f7..bef1f40 100644
+--- a/app.py
++++ b/app.py
+@@ -16,6 +16,11 @@ STATIC = {
+     "/index.html": ("index.html", "text/html; charset=utf-8"),
+     "/style.css": ("style.css", "text/css; charset=utf-8"),
+     "/app.js": ("app.js", "text/javascript; charset=utf-8"),
++    "/manifest.webmanifest": ("manifest.webmanifest", "application/manifest+json; charset=utf-8"),
++    "/sw.js": ("sw.js", "text/javascript; charset=utf-8"),
++    "/pwa.js": ("pwa.js", "text/javascript; charset=utf-8"),
++    "/icons/icon-192.png": ("icons/icon-192.png", "image/png"),
++    "/icons/icon-512.png": ("icons/icon-512.png", "image/png"),
+ }
+ 
+ 

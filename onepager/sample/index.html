@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>샘플 운영팀 주간 보고서 · 2026년 41주</title>
+  <style>
+    :root {
+      --surface: #fcfcfb;
+      --card: #ffffff;
+      --line: #e3e5e8;
+      --grid: #eceef1;
+      --text: #0b0b0b;
+      --text-2: #52514e;
+      --muted: #77756f;
+      --series: #2a78d6;
+      --accent: #eb6834;
+      --good: #0ca30c;
+      --warn-bg: #fff4e5;
+      --warn-text: #8a4b00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--surface);
+      color: var(--text);
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Segoe UI", sans-serif;
+    }
+    main { max-width: 960px; margin: 0 auto; padding: 24px 16px 48px; }
+    section { margin-top: 32px; }
+    h1 { margin: 16px 0 4px; font-size: 28px; line-height: 1.3; }
+    h2 { margin: 0 0 12px; font-size: 20px; }
+    .period { margin: 0; color: var(--text-2); }
+    .cover { display: block; width: 100%; height: auto; border-radius: 16px; }
+
+    /* 요약 카드 */
+    .cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 24px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+    .card span { display: block; color: var(--text-2); font-size: 14px; }
+    .card strong { display: block; font-size: 26px; line-height: 1.3; font-variant-numeric: tabular-nums; }
+
+    /* 차트 */
+    .chart-box { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+    .chart { display: block; width: 100%; height: auto; }
+    .chart .grid line { stroke: var(--grid); stroke-width: 1; }
+    .chart .grid text, .chart .day { fill: var(--muted); font-size: 13px; }
+    .chart .bar { fill: var(--series); }
+    .chart .band:hover + .bar, .chart .bar:hover { opacity: 0.8; }
+    .chart .band { fill: transparent; }
+    .chart .tip { fill: var(--text); font-size: 13px; font-weight: 600; }
+    details { margin-top: 8px; }
+    summary { cursor: pointer; color: var(--text-2); }
+
+    /* 표 */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; background: var(--card); font-size: 15px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+    th { color: var(--text-2); font-weight: 600; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td.memo { white-space: normal; min-width: 180px; color: var(--text-2); }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 13px; }
+    .badge.ok { background: #e7f6e7; color: #0a6b0a; }
+    .badge.warn { background: var(--warn-bg); color: var(--warn-text); }
+
+    /* 듣고 보기 */
+    .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .media-grid > div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+    audio, video { display: block; width: 100%; }
+    video { border-radius: 8px; background: #1f2a3a; aspect-ratio: 16 / 9; }
+    .missing { margin: 0; padding: 12px; border-radius: 8px; background: var(--warn-bg); color: var(--warn-text); }
+    .script { margin: 12px 0 0; color: var(--text-2); font-size: 15px; }
+
+    /* 한 일 */
+    .done-grid { display: grid; grid-template-columns: 1fr 1fr 200px; gap: 16px; align-items: start; }
+    .done-grid ul { margin: 0; padding-left: 20px; }
+    .photo { width: 100%; height: auto; }
+
+    footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    footer p { margin: 4px 0; }
+
+    /* 좁은 화면 */
+    @media (max-width: 720px) {
+      h1 { font-size: 24px; }
+      .cards { grid-template-columns: repeat(2, 1fr); }
+      .card strong { font-size: 22px; }
+      .media-grid, .done-grid { grid-template-columns: 1fr; }
+      .photo { max-width: 240px; }
+      /* 차트는 화면 폭에 맞춰 줄어들어서, 좁은 화면에서는 글자를 키워 둬요. */
+      .chart .grid text, .chart .day, .chart .tip { font-size: 24px; }
+    }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <img id="cover" class="cover" alt="보고서 종이와 막대 차트, 소리 물결, 재생 버튼이 있는 표지 그림">
+    <h1>샘플 운영팀 주간 보고서</h1>
+    <p class="period" id="period"></p>
+  </header>
+
+  <div class="cards" id="cards"></div>
+
+  <section>
+    <h2>요일별 요청 수</h2>
+    <div class="chart-box">
+      <svg class="chart" id="chart" viewBox="0 0 640 260" role="img" aria-labelledby="chart-title">
+        <title id="chart-title">요일별 요청 수 막대 차트</title>
+      </svg>
+      <details>
+        <summary>표로 보기</summary>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>요일</th><th class="num">요청 수</th><th class="num">오류율</th></tr></thead>
+            <tbody id="daily-rows"></tbody>
+          </table>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2>서비스별 요약</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>서비스</th><th class="num">요청 수</th><th class="num">오류율</th><th class="num">배포</th><th>상태</th><th>메모</th></tr></thead>
+        <tbody id="service-rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>듣고 보기</h2>
+    <div class="media-grid">
+      <div>
+        <h3>음성 요약</h3>
+        <audio id="voice" controls preload="metadata"></audio>
+        <p class="missing" id="voice-missing" hidden>음성 파일이 없어요.</p>
+        <p class="script" id="voice-script"></p>
+      </div>
+      <div>
+        <h3>이번 주 하이라이트</h3>
+        <video id="video" muted loop playsinline autoplay preload="metadata"></video>
+        <p class="missing" id="video-missing" hidden>영상 파일이 없어요.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>이번 주 한 일과 다음 주 할 일</h2>
+    <div class="done-grid">
+      <div><h3>이번 주 한 일</h3><ul id="done"></ul></div>
+      <div><h3>다음 주 할 일</h3><ul id="next"></ul></div>
+      <img id="photo" class="photo" alt="체크 표시가 있는 노트와 도장 그림">
+    </div>
+  </section>
+
+  <footer>
+    <p>모든 숫자는 수업용 가상 데이터예요.</p>
+    <p id="media-status" data-loaded="0/4">미디어를 확인하는 중이에요.</p>
+  </footer>
+</main>
+
+<script>
+// 미디어 파일 계약: 경로는 여기에만 둬요. 파일이 없으면 그 칸만 숨기거나 안내 문구를 보여 줘요.
+const MEDIA = {
+  cover: 'media/cover.svg',
+  photo: 'media/checklist.png',
+  voice: 'media/summary.m4a',
+  video: 'media/highlight.mp4',
+};
+
+// 데이터: 모두 수업용 가상 데이터예요. 화면의 숫자는 이 객체에서 읽거나 계산해요.
+const REPORT = {
+  period: '2026년 41주 · 10월 5일(월)–10월 11일(일)',
+  days: [
+    { day: '월', requests: 286400, errorRate: 0.31 },
+    { day: '화', requests: 301200, errorRate: 0.28 },
+    { day: '수', requests: 295800, errorRate: 0.35 },
+    { day: '목', requests: 318900, errorRate: 0.82 },
+    { day: '금', requests: 290100, errorRate: 0.40 },
+    { day: '토', requests: 172300, errorRate: 0.22 },
+    { day: '일', requests: 168700, errorRate: 0.25 },
+  ],
+  services: [
+    { name: 'billing(결제)', requests: 548200, errorRate: 0.21, deploys: 4, status: '정상', memo: '' },
+    { name: 'catalog(상품 목록)', requests: 826700, errorRate: 0.58, deploys: 5, status: '주의', memo: '목요일 배포 뒤 오류율이 올라 40분 만에 되돌림' },
+    { name: 'identity(로그인)', requests: 458500, errorRate: 0.31, deploys: 3, status: '정상', memo: '' },
+  ],
+  incidents: 1,
+  done: ['catalog 검색 캐시 적용', 'billing 결제 로그 보관 기간 정리', '목요일 장애 회고 작성'],
+  next: ['billing 응답 시간 줄이기', 'catalog 배포 전 점검 목록 만들기'],
+  script: '샘플 운영팀 41주 주간 보고입니다. 이번 주 요청은 약 183만 건이고, 평균 오류율은 0.4퍼센트입니다. 배포는 12번 했고, 장애는 1건 있었습니다. 목요일에 상품 목록 서비스 배포 뒤 오류율이 올라가서, 40분 만에 이전 버전으로 되돌렸습니다. 다음 주에는 결제 서비스의 응답 시간을 줄이는 작업을 합니다.',
+};
+
+const $ = (selector) => document.querySelector(selector);
+const fmt = (n) => n.toLocaleString('ko-KR');
+const pct = (n) => n.toFixed(2) + '%';
+
+function summarize(report) {
+  const total = report.days.reduce((sum, d) => sum + d.requests, 0);
+  const errors = report.days.reduce((sum, d) => sum + d.requests * d.errorRate, 0);
+  const deploys = report.services.reduce((sum, s) => sum + s.deploys, 0);
+  return { total, errorRate: errors / total, deploys, incidents: report.incidents };
+}
+
+function renderCards() {
+  const s = summarize(REPORT);
+  const cards = [
+    ['총 요청 수', fmt(s.total) + '건'],
+    ['평균 오류율', pct(s.errorRate)],
+    ['배포 횟수', s.deploys + '회'],
+    ['장애 건수', s.incidents + '건'],
+  ];
+  $('#cards').innerHTML = cards
+    .map(([label, value]) => `<div class="card"><span>${label}</span><strong>${value}</strong></div>`)
+    .join('');
+}
+
+function renderChart() {
+  const svg = $('#chart');
+  const left = 56, right = 624, top = 24, base = 220;
+  const max = 350000;
+  const y = (v) => base - (v / max) * (base - top);
+  const band = (right - left) / REPORT.days.length;
+  const barWidth = 24;
+  const peak = Math.max(...REPORT.days.map((d) => d.requests));
+  let out = '<g class="grid">';
+  for (const v of [0, 100000, 200000, 300000]) {
+    out += `<line x1="${left}" x2="${right}" y1="${y(v)}" y2="${y(v)}"></line>`;
+    out += `<text x="${left - 8}" y="${y(v) + 4}" text-anchor="end">${v === 0 ? 0 : v / 10000 + '만'}</text>`;
+  }
+  out += '</g>';
+  REPORT.days.forEach((d, i) => {
+    const x = left + band * i + (band - barWidth) / 2;
+    const top = y(d.requests);
+    const label = `${d.day}요일 · ${fmt(d.requests)}건 · 오류율 ${pct(d.errorRate)}`;
+    // 막대 위쪽만 4px 둥글게, 바닥은 반듯하게 그려요.
+    const path = `M${x},${base}V${top + 4}Q${x},${top} ${x + 4},${top}H${x + barWidth - 4}Q${x + barWidth},${top} ${x + barWidth},${top + 4}V${base}Z`;
+    out += `<rect class="band" x="${left + band * i}" y="${top - 20}" width="${band}" height="${base - top + 20}"><title>${label}</title></rect>`;
+    out += `<path class="bar" d="${path}"><title>${label}</title></path>`;
+    out += `<text class="day" x="${x + barWidth / 2}" y="${base + 22}" text-anchor="middle">${d.day}</text>`;
+    if (d.requests === peak) {
+      out += `<text class="tip" x="${x + barWidth / 2}" y="${top - 8}" text-anchor="middle">${fmt(d.requests)}</text>`;
+    }
+  });
+  svg.insertAdjacentHTML('beforeend', out);
+
+  $('#daily-rows').innerHTML = REPORT.days
+    .map((d) => `<tr><td>${d.day}</td><td class="num">${fmt(d.requests)}</td><td class="num">${pct(d.errorRate)}</td></tr>`)
+    .join('');
+}
+
+function renderServices() {
+  $('#service-rows').innerHTML = REPORT.services
+    .map((s) => {
+      const badge = s.status === '정상' ? 'ok' : 'warn';
+      return `<tr><td>${s.name}</td><td class="num">${fmt(s.requests)}</td><td class="num">${pct(s.errorRate)}</td>`
+        + `<td class="num">${s.deploys}회</td><td><span class="badge ${badge}">${s.status}</span></td><td class="memo">${s.memo || '-'}</td></tr>`;
+    })
+    .join('');
+}
+
+function renderLists() {
+  $('#period').textContent = REPORT.period;
+  $('#voice-script').textContent = '원고: ' + REPORT.script;
+  $('#done').innerHTML = REPORT.done.map((t) => `<li>${t}</li>`).join('');
+  $('#next').innerHTML = REPORT.next.map((t) => `<li>${t}</li>`).join('');
+}
+
+// 미디어 연결: 파일마다 있으면 "있음", 없으면 "없음"으로 상태 줄에 적어요.
+const NAMES = { cover: '표지', photo: '그림', voice: '음성', video: '영상' };
+const state = {};
+
+function showStatus() {
+  const keys = Object.keys(NAMES);
+  const loaded = keys.filter((k) => state[k] === true).length;
+  const line = keys.map((k) => `${NAMES[k]} ${state[k] === undefined ? '확인 중' : state[k] ? '있음' : '없음'}`).join(' · ');
+  const status = $('#media-status');
+  status.textContent = line;
+  status.dataset.loaded = `${loaded}/${keys.length}`;
+}
+
+function watch(key, el, okEvent, onMissing) {
+  el.addEventListener(okEvent, () => { state[key] = true; showStatus(); }, { once: true });
+  el.addEventListener('error', () => { state[key] = false; onMissing(); showStatus(); }, { once: true });
+  el.src = MEDIA[key];
+}
+
+function connectMedia() {
+  watch('cover', $('#cover'), 'load', () => { $('#cover').hidden = true; });
+  watch('photo', $('#photo'), 'load', () => { $('#photo').hidden = true; });
+  watch('voice', $('#voice'), 'loadedmetadata', () => {
+    $('#voice').hidden = true;
+    $('#voice-missing').hidden = false;
+  });
+  const video = $('#video');
+  watch('video', video, 'loadeddata', () => {
+    video.hidden = true;
+    $('#video-missing').hidden = false;
+  });
+  // 소리 없는 영상은 자동재생이 허용되지만, 막히면 재생 막대를 보여 줘서 직접 누르게 해요.
+  video.play().catch(() => { video.controls = true; });
+  showStatus();
+}
+
+renderCards();
+renderChart();
+renderServices();
+renderLists();
+connectMedia();
+</script>
+</body>
+</html>

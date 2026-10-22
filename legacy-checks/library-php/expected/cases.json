@@ -1,0 +1,144 @@
+{
+  "about": "원본 src/를 실제로 실행해서 기록한 결과예요. 고치지 않아요.",
+  "programs": {
+    "batch": "php src/batch.php <요청 CSV> <기준일 YYYY-MM-DD> <저장소 폴더>",
+    "overdue_report": "php src/overdue_report.php <기준일 YYYY-MM-DD> <저장소 폴더>"
+  },
+  "store": "{store}는 verify.py가 사례마다 data/store를 새로 복사한 임시 폴더 경로로 바꿔요.",
+  "recorded_with": "PHP 8.4.8 (cli) (built: Jul 22 2025 16:20:30) (NTS) (php -n -d display_errors=stderr)",
+  "compare": "표준 출력과 종료 코드, files에 적힌 저장소 파일. 줄바꿈(CRLF와 LF)은 같게 봐요. 보고서의 칸 맞춤은 PHP str_pad라서 글자 수가 아니라 UTF-8 바이트 수로 맞춰요.",
+  "cases": [
+    {
+      "name": "batch-1226",
+      "script": "batch",
+      "args": [
+        "data/requests/2011-12-26.csv",
+        "2011-12-26",
+        "{store}"
+      ],
+      "inputs": [
+        "data/requests/2011-12-26.csv",
+        "data/store/"
+      ],
+      "stdout": "batch-1226.txt",
+      "exit": 0,
+      "files": {
+        "books.csv": "batch-1226/books.csv",
+        "members.csv": "batch-1226/members.csv",
+        "loans.csv": "batch-1226/loans.csv",
+        "reservations.csv": "batch-1226/reservations.csv",
+        "donation.csv": "batch-1226/donation.csv"
+      },
+      "note": "2011년 12월 26일 신청서 17건(중간에 빈 줄 하나). 연체 반납, 3회 연체 정지, 한도 초과, 예약, 분실, 잘못된 날짜가 섞여 있어요."
+    },
+    {
+      "name": "batch-0105",
+      "script": "batch",
+      "args": [
+        "data/requests/2012-01-05.csv",
+        "2012-01-05",
+        "{store}"
+      ],
+      "inputs": [
+        "data/requests/2012-01-05.csv",
+        "data/store/"
+      ],
+      "stdout": "batch-0105.txt",
+      "exit": 0,
+      "files": {
+        "books.csv": "batch-0105/books.csv",
+        "members.csv": "batch-0105/members.csv",
+        "loans.csv": "batch-0105/loans.csv",
+        "reservations.csv": "batch-0105/reservations.csv",
+        "donation.csv": "batch-0105/donation.csv"
+      },
+      "note": "2012년 1월 5일 신청서 10건. 연체료 상한, 연장 두 번, 임원 대출, 예약자 연락이 나와요. 12월 26일 처리와는 따로 같은 저장소에서 시작해요."
+    },
+    {
+      "name": "report-1228",
+      "script": "overdue_report",
+      "args": [
+        "2011-12-28",
+        "{store}"
+      ],
+      "inputs": [
+        "data/store/"
+      ],
+      "stdout": "report-1228.txt",
+      "exit": 0,
+      "note": "2011년 12월 28일 연체 보고."
+    },
+    {
+      "name": "report-0105",
+      "script": "overdue_report",
+      "args": [
+        "2012-01-05",
+        "{store}"
+      ],
+      "inputs": [
+        "data/store/"
+      ],
+      "stdout": "report-0105.txt",
+      "exit": 0,
+      "note": "2012년 1월 5일 연체 보고. 해가 바뀐 뒤라 결과가 12월 28일과 많이 달라요."
+    },
+    {
+      "name": "batch-no-file",
+      "script": "batch",
+      "args": [
+        "data/requests/none.csv",
+        "2012-01-05",
+        "{store}"
+      ],
+      "inputs": [
+        "data/store/"
+      ],
+      "stdout": "batch-no-file.txt",
+      "exit": 0,
+      "files": {
+        "loans.csv": "batch-no-file/loans.csv",
+        "donation.csv": "batch-no-file/donation.csv"
+      },
+      "note": "요청 파일이 없을 때. 저장소는 그대로예요."
+    },
+    {
+      "name": "batch-bad-date",
+      "script": "batch",
+      "args": [
+        "data/requests/2012-01-05.csv",
+        "2012-13-01",
+        "{store}"
+      ],
+      "inputs": [
+        "data/requests/2012-01-05.csv",
+        "data/store/"
+      ],
+      "stdout": "batch-bad-date.txt",
+      "exit": 1,
+      "note": "기준일이 13월일 때."
+    },
+    {
+      "name": "batch-no-args",
+      "script": "batch",
+      "args": [],
+      "inputs": [],
+      "stdout": "batch-no-args.txt",
+      "exit": 1,
+      "note": "인자 없이 실행했을 때."
+    },
+    {
+      "name": "report-bad-date",
+      "script": "overdue_report",
+      "args": [
+        "2011-13-45",
+        "{store}"
+      ],
+      "inputs": [
+        "data/store/"
+      ],
+      "stdout": "report-bad-date.txt",
+      "exit": 1,
+      "note": "기준일을 읽을 수 없을 때."
+    }
+  ]
+}

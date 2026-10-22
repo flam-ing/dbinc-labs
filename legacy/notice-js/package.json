@@ -1,0 +1,16 @@
+{
+  "name": "nuri-notice-bot",
+  "version": "1.4.0",
+  "description": "누리상사 사내 공지 알림 봇",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js notices.json employees.json 2016-04-20T09:00",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "총무팀 시스템",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=4"
+  }
+}

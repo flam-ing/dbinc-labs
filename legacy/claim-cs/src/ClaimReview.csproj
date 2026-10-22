@@ -1,0 +1,17 @@
+<!--
+  원래는 Visual Studio 2010 솔루션(ClaimReview.sln, .NET Framework 4.0)이었음.
+  2024-05 서버 교체 검토 때 .NET 8 SDK로 빌드되게 프로젝트 파일만 새로 만듦. 소스(.cs)는 손대지 않음.
+  실행 방법은 README 참고.
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>ClaimReview</AssemblyName>
+    <RootNamespace>NuriClaim</RootNamespace>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+</Project>

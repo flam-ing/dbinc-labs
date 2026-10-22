@@ -1,0 +1,21 @@
+{
+  "req_id": "BT-2019-0102",
+  "emp_no": "N2210",
+  "name": "이서연",
+  "dept": "마케팅팀",
+  "grade": "과장",
+  "trip_type": "DOMESTIC",
+  "city": "전주",
+  "purpose": "하반기 행사장 답사",
+  "depart": "2019-06-27",
+  "return": "2019-06-28",
+  "submitted": "2019-07-01",
+  "receipts": [
+    {"type": "BUS", "date": "2019-06-27", "amount": 23400, "currency": "KRW", "desc": "고속버스 서울-전주"},
+    {"type": "HOTEL", "date": "2019-06-28", "amount": 89000, "currency": "KRW", "desc": "1박"},
+    {"type": "MEAL", "date": "2019-06-27", "amount": 35000, "currency": "KRW", "receipt": false, "desc": "현장 식대 2인"},
+    {"type": "PARKING", "date": "2019-06-28", "amount": 12000, "currency": "KRW", "desc": "행사장 주차"},
+    {"type": "BUS", "date": "2019-06-28", "amount": 23400, "currency": "KRW", "desc": "고속버스 전주-서울"}
+  ],
+  "memo": "행사장 두 곳을 봤어요. 숙소는 행사 기간이라 비쌌습니다."
+}

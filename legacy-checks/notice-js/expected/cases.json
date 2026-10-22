@@ -1,0 +1,127 @@
+{
+  "about": "원본(node src/bot.js)을 실제로 실행해서 기록한 결과예요. 고치지 마세요.",
+  "recorded_with": "node v24.21.0",
+  "program": "node src/bot.js <공지.json> <직원.json> <휴일.json> <기준시각 YYYY-MM-DDTHH:mm> <출력폴더>",
+  "how_to_run": "verify.py는 이 폴더(notice-js)에서 실행 명령 뒤에 args를 붙여 실행해요. {out}은 verify.py가 만든 빈 출력 폴더로 바뀌어요.",
+  "compare": [
+    "files에 적힌 파일을 출력 폴더에서 찾아 expected/의 파일과 비교해요.",
+    "JSON 파일은 내용으로 비교해요. 키 순서와 들여쓰기는 보지 않지만 배열 순서는 봐요.",
+    "글 파일은 줄 단위로 비교해요. 줄바꿈(CRLF, LF)과 맨 끝 빈 줄 차이는 무시해요.",
+    "absent에 적힌 파일은 생기면 안 돼요.",
+    "exit는 종료 코드예요. 표준 출력(화면에 찍히는 글)은 비교하지 않아요."
+  ],
+  "cases": [
+    {
+      "name": "basic",
+      "note": "월요일 아침 8시 50분(업무 시작 전)에 돌린 기본 사례예요.",
+      "inputs": [
+        "data/notices.json",
+        "data/employees.json",
+        "data/holidays.json"
+      ],
+      "args": [
+        "data/notices.json",
+        "data/employees.json",
+        "data/holidays.json",
+        "2022-03-14T08:50",
+        "{out}"
+      ],
+      "exit": 0,
+      "files": {
+        "outbox.json": "basic/outbox.json",
+        "summary.txt": "basic/summary.txt"
+      }
+    },
+    {
+      "name": "evening",
+      "note": "월요일 저녁 6시 40분. 지난 예약은 다음 영업일로 미뤄져요(창립기념일 3월 15일).",
+      "inputs": [
+        "data/notices.json",
+        "data/employees.json",
+        "data/holidays.json"
+      ],
+      "args": [
+        "data/notices.json",
+        "data/employees.json",
+        "data/holidays.json",
+        "2022-03-14T18:40",
+        "{out}"
+      ],
+      "exit": 0,
+      "files": {
+        "outbox.json": "evening/outbox.json",
+        "summary.txt": "evening/summary.txt"
+      }
+    },
+    {
+      "name": "chuseok",
+      "note": "추석 연휴 전날 저녁. 메일과 메신저가 다른 날로 미뤄져요.",
+      "inputs": [
+        "data/notices.json",
+        "data/employees.json",
+        "data/holidays.json"
+      ],
+      "args": [
+        "data/notices.json",
+        "data/employees.json",
+        "data/holidays.json",
+        "2022-09-08T18:30",
+        "{out}"
+      ],
+      "exit": 0,
+      "files": {
+        "outbox.json": "chuseok/outbox.json",
+        "summary.txt": "chuseok/summary.txt"
+      }
+    },
+    {
+      "name": "no-notices",
+      "note": "공지가 하나도 없는 날이에요.",
+      "inputs": [
+        "data/notices-empty.json",
+        "data/employees.json",
+        "data/holidays.json"
+      ],
+      "args": [
+        "data/notices-empty.json",
+        "data/employees.json",
+        "data/holidays.json",
+        "2022-03-14T08:50",
+        "{out}"
+      ],
+      "exit": 0,
+      "files": {
+        "outbox.json": "no-notices/outbox.json",
+        "summary.txt": "no-notices/summary.txt"
+      }
+    },
+    {
+      "name": "missing-holidays",
+      "note": "휴일 파일이 없어요. 원본은 아무 파일도 만들지 않고 종료 코드 0으로 끝나요.",
+      "inputs": [
+        "data/notices.json",
+        "data/employees.json"
+      ],
+      "args": [
+        "data/notices.json",
+        "data/employees.json",
+        "data/holidays-2023.json",
+        "2022-03-14T08:50",
+        "{out}"
+      ],
+      "exit": 0,
+      "files": {},
+      "absent": [
+        "outbox.json",
+        "summary.txt"
+      ]
+    },
+    {
+      "name": "no-args",
+      "note": "인자 없이 실행했어요. 사용법을 보여 주고 종료 코드 1로 끝나요.",
+      "inputs": [],
+      "args": [],
+      "exit": 1
+    }
+  ]
+}

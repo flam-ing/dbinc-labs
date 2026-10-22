@@ -1,0 +1,52 @@
+[
+  {
+    "id": "T-31003",
+    "category": "결제",
+    "urgency": "P2",
+    "score": 5,
+    "team": "VIP전담팀",
+    "receivedAt": "2021-02-11 10:00",
+    "deadline": "2021-02-11 14:00",
+    "overdue": true
+  },
+  {
+    "id": "T-31004",
+    "category": "배송",
+    "urgency": "P2",
+    "score": 5,
+    "team": "물류CS팀",
+    "receivedAt": "2021-02-12 20:00",
+    "deadline": "2021-02-15 13:00",
+    "overdue": false
+  },
+  {
+    "id": "T-31002",
+    "category": "결제",
+    "urgency": "P3",
+    "score": 4,
+    "team": "결제지원팀",
+    "receivedAt": "2021-02-10 15:00",
+    "deadline": "2021-02-11 15:00",
+    "overdue": true
+  },
+  {
+    "id": "T-31001",
+    "category": "배송",
+    "urgency": "P4",
+    "score": 1,
+    "team": "물류CS팀",
+    "receivedAt": "2021-02-09 14:00",
+    "deadline": "2021-02-12 14:00",
+    "overdue": true
+  },
+  {
+    "id": "T-31005",
+    "category": "계정",
+    "urgency": "P4",
+    "score": 1,
+    "team": "회원지원팀",
+    "receivedAt": "2021-02-15 09:20",
+    "deadline": "2021-02-18 09:20",
+    "overdue": false
+  }
+]

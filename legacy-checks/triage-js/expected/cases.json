@@ -1,0 +1,119 @@
+{
+  "about": "원본(node cli/triage.js)을 실제로 실행해서 기록한 결과예요. 고치지 마세요.",
+  "recorded_with": "node v24.21.0",
+  "program": "node cli/triage.js <티켓.json> [--now YYYY-MM-DDTHH:mm] [--json]",
+  "how_to_run": "verify.py는 이 폴더(triage-js)에서 실행 명령 뒤에 args를 붙여 실행해요.",
+  "compare": [
+    "stdout에 적힌 파일과 표준 출력을 비교해요. stdout이 없는 사례는 종료 코드만 봐요.",
+    ".json 파일은 JSON 내용으로 비교해요. 키 순서와 들여쓰기는 보지 않지만 배열 순서는 봐요.",
+    ".txt 파일은 줄 단위로 비교해요. 줄바꿈(CRLF, LF), 줄 끝 공백, 맨 끝 빈 줄 차이는 무시해요.",
+    "exit는 종료 코드예요. stderr(오류 메시지)는 비교하지 않아요."
+  ],
+  "cases": [
+    {
+      "name": "basic",
+      "note": "2020년 추석 연휴 다음 월요일 아침 10시에 돌린 표 출력이에요.",
+      "inputs": [
+        "data/tickets.json"
+      ],
+      "args": [
+        "data/tickets.json",
+        "--now",
+        "2020-10-05T10:00"
+      ],
+      "exit": 0,
+      "stdout": "basic.txt"
+    },
+    {
+      "name": "basic-json",
+      "note": "같은 입력을 --json으로 출력했어요.",
+      "inputs": [
+        "data/tickets.json"
+      ],
+      "args": [
+        "data/tickets.json",
+        "--now",
+        "2020-10-05T10:00",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout": "basic.json"
+    },
+    {
+      "name": "next-day-json",
+      "note": "하루 뒤 저녁 6시. 마감 지남(overdue)이 늘어나요.",
+      "inputs": [
+        "data/tickets.json"
+      ],
+      "args": [
+        "data/tickets.json",
+        "--now",
+        "2020-10-06T18:00",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout": "next-day.json"
+    },
+    {
+      "name": "seol-2021",
+      "note": "2021년 설 연휴 다음 월요일. 휴일 목록에 2021년이 없어요.",
+      "inputs": [
+        "data/tickets-2021.json"
+      ],
+      "args": [
+        "data/tickets-2021.json",
+        "--now",
+        "2021-02-15T10:00"
+      ],
+      "exit": 0,
+      "stdout": "seol-2021.txt"
+    },
+    {
+      "name": "seol-2021-json",
+      "note": "같은 입력을 --json으로 출력했어요.",
+      "inputs": [
+        "data/tickets-2021.json"
+      ],
+      "args": [
+        "data/tickets-2021.json",
+        "--now",
+        "2021-02-15T10:00",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout": "seol-2021.json"
+    },
+    {
+      "name": "empty",
+      "note": "티켓이 하나도 없어요.",
+      "inputs": [
+        "data/tickets-empty.json"
+      ],
+      "args": [
+        "data/tickets-empty.json",
+        "--now",
+        "2020-10-05T10:00"
+      ],
+      "exit": 0,
+      "stdout": "empty.txt"
+    },
+    {
+      "name": "missing-file",
+      "note": "티켓 파일이 없어요. 오류를 stderr에 쓰고 종료 코드 2로 끝나요.",
+      "inputs": [],
+      "args": [
+        "data/none.json",
+        "--now",
+        "2020-10-05T10:00"
+      ],
+      "exit": 2
+    },
+    {
+      "name": "no-args",
+      "note": "인자 없이 실행했어요. 사용법을 보여 주고 종료 코드 1로 끝나요.",
+      "inputs": [],
+      "args": [],
+      "exit": 1
+    }
+  ]
+}

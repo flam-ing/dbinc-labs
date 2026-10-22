@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <rect width="640" height="360" fill="#fdf1ea"/>
+  <circle cx="540" cy="250" r="70" fill="#eb6834"/>
+  <path d="M510 250l20 20 36-40" fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="48" y="140" fill="#0b0b0b" font-family="Apple SD Gothic Neo, Malgun Gothic, sans-serif" font-size="56" font-weight="800">배포 12회</text>
+  <text x="48" y="214" fill="#52514e" font-family="Apple SD Gothic Neo, Malgun Gothic, sans-serif" font-size="34" font-weight="700">평균 오류율 0.40%</text>
+  <text x="48" y="262" fill="#77756f" font-family="Apple SD Gothic Neo, Malgun Gothic, sans-serif" font-size="24">장애 1건, 40분 만에 되돌림</text>
+</svg>

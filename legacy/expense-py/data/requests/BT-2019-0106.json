@@ -1,0 +1,19 @@
+{
+  "req_id": "BT-2019-0106",
+  "emp_no": "N0012",
+  "name": "이상훈",
+  "dept": "경영지원본부",
+  "grade": "전무",
+  "trip_type": "OVERSEAS",
+  "city": "파리",
+  "purpose": "유럽 파트너사 협약식",
+  "depart": "2019-06-17",
+  "return": "2019-06-21",
+  "submitted": "2019-06-24",
+  "receipts": [
+    {"type": "AIR", "date": "2019-06-01", "amount": 3420000, "currency": "KRW", "desc": "왕복 항공권(비즈니스)"},
+    {"type": "HOTEL", "date": "2019-06-21", "amount": 1920.00, "currency": "EUR", "desc": "4박"},
+    {"type": "TAXI", "date": "2019-06-17", "amount": 86.40, "currency": "EUR", "desc": "공항-호텔"},
+    {"type": "MEAL", "date": "2019-06-19", "amount": 210.00, "currency": "EUR", "desc": "파트너사 만찬"}
+  ]
+}

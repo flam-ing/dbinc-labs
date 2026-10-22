@@ -1,0 +1,12 @@
+{
+  "name": "cs-triage",
+  "version": "0.3.1",
+  "description": "상담 티켓 분류 도우미",
+  "bin": {
+    "cs-triage": "cli/triage.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true
+}

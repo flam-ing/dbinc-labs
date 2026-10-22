@@ -1,0 +1,13 @@
+diff --git a/web/public/pwa.js b/web/public/pwa.js
+index 9b48db5..c36d654 100644
+--- a/web/public/pwa.js
++++ b/web/public/pwa.js
+@@ -59,7 +59,7 @@
+     lastSeen = latest;
+     writeLastSeen(latest);
+     const newest = fresh[0];
+-    const title = fresh.length === 1 ? `새 방명록: ${newest.name}` : `새 방명록 ${fresh.length}개`;
++    const title = fresh.length === 1 ? `새 칭찬: ${newest.name}` : `새 칭찬 ${fresh.length}개`;
+     await registration.showNotification(title, {
+       body: newest.message.slice(0, 120),
+       icon: '/icons/icon-192.png',

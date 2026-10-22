@@ -1,0 +1,116 @@
+diff --git a/deploy/index.html b/deploy/index.html
+index a44c3fe..e4b429d 100644
+--- a/deploy/index.html
++++ b/deploy/index.html
+@@ -30,6 +30,7 @@
+   .overlay[hidden] { display: none; }
+   .overlay h2 { margin: 0; font-size: 34px; letter-spacing: -.03em; text-shadow: 3px 3px 0 var(--yellow); }
+   .overlay p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.5; }
++  .overlay .best { font-size: 18px; font-weight: 800; color: var(--ink); }
+   .overlay .big { font-size: 22px; font-weight: 800; color: var(--ink); }
+   .start-screen { background: var(--sky); }
+   .start-screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; background: var(--sky); }
+@@ -80,6 +81,7 @@
+     <div class="overlay" id="over" hidden>
+       <h2>게임 오버</h2>
+       <p class="big" id="over-score">0점</p>
++      <p class="best" id="over-best"></p>
+       <p>당근에 다섯 번 부딪혔어요.</p>
+       <button class="primary" id="again" type="button">다시 하기</button>
+     </div>
+@@ -88,6 +90,7 @@
+       <h2>축하해요! 클리어</h2>
+       <canvas id="ending" class="ending" width="160" height="90" aria-label="엔딩 영상: 토끼가 당근을 안고 폭죽 속에서 뛰어요"></canvas>
+       <p id="clear-note">300점을 모았어요. 당근을 다 피했어요!</p>
++      <p class="best" id="clear-best"></p>
+       <button class="primary" id="again2" type="button">다시 하기</button>
+     </div>
+   </div>
+@@ -269,10 +272,29 @@ function loop(now) {
+   requestAnimationFrame(loop);
+ }
+ 
++// ---------- 최고 점수 (이 브라우저에만 저장해요) ----------
++const BEST_KEY = 'rabbit-carrot-best';
++
++function loadBest() {
++  try { return Number(localStorage.getItem(BEST_KEY)) || 0; } catch (e) { return 0; }
++}
++
++function saveBest(n) {
++  try { localStorage.setItem(BEST_KEY, String(n)); } catch (e) { /* 저장이 막혀도 게임은 계속돼요 */ }
++}
++
++function showBest(kind) {
++  const final = Math.floor(score), prev = loadBest();
++  const isNew = final > prev;
++  if (isNew) saveBest(final);
++  $(kind === 'over' ? 'over-best' : 'clear-best').textContent = `최고 점수 ${Math.max(final, prev)}점` + (isNew ? ' · 새 기록' : '');
++}
++
+ function endGame(kind) {
+   state = kind;
+   stopMusic();
+   draw();
++  showBest(kind);
+   if (kind === 'over') {
+     $('over-score').textContent = Math.floor(score) + '점';
+     $('over').hidden = false;
+diff --git a/index.html b/index.html
+index a44c3fe..e4b429d 100644
+--- a/index.html
++++ b/index.html
+@@ -30,6 +30,7 @@
+   .overlay[hidden] { display: none; }
+   .overlay h2 { margin: 0; font-size: 34px; letter-spacing: -.03em; text-shadow: 3px 3px 0 var(--yellow); }
+   .overlay p { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.5; }
++  .overlay .best { font-size: 18px; font-weight: 800; color: var(--ink); }
+   .overlay .big { font-size: 22px; font-weight: 800; color: var(--ink); }
+   .start-screen { background: var(--sky); }
+   .start-screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; background: var(--sky); }
+@@ -80,6 +81,7 @@
+     <div class="overlay" id="over" hidden>
+       <h2>게임 오버</h2>
+       <p class="big" id="over-score">0점</p>
++      <p class="best" id="over-best"></p>
+       <p>당근에 다섯 번 부딪혔어요.</p>
+       <button class="primary" id="again" type="button">다시 하기</button>
+     </div>
+@@ -88,6 +90,7 @@
+       <h2>축하해요! 클리어</h2>
+       <canvas id="ending" class="ending" width="160" height="90" aria-label="엔딩 영상: 토끼가 당근을 안고 폭죽 속에서 뛰어요"></canvas>
+       <p id="clear-note">300점을 모았어요. 당근을 다 피했어요!</p>
++      <p class="best" id="clear-best"></p>
+       <button class="primary" id="again2" type="button">다시 하기</button>
+     </div>
+   </div>
+@@ -269,10 +272,29 @@ function loop(now) {
+   requestAnimationFrame(loop);
+ }
+ 
++// ---------- 최고 점수 (이 브라우저에만 저장해요) ----------
++const BEST_KEY = 'rabbit-carrot-best';
++
++function loadBest() {
++  try { return Number(localStorage.getItem(BEST_KEY)) || 0; } catch (e) { return 0; }
++}
++
++function saveBest(n) {
++  try { localStorage.setItem(BEST_KEY, String(n)); } catch (e) { /* 저장이 막혀도 게임은 계속돼요 */ }
++}
++
++function showBest(kind) {
++  const final = Math.floor(score), prev = loadBest();
++  const isNew = final > prev;
++  if (isNew) saveBest(final);
++  $(kind === 'over' ? 'over-best' : 'clear-best').textContent = `최고 점수 ${Math.max(final, prev)}점` + (isNew ? ' · 새 기록' : '');
++}
++
+ function endGame(kind) {
+   state = kind;
+   stopMusic();
+   draw();
++  showBest(kind);
+   if (kind === 'over') {
+     $('over-score').textContent = Math.floor(score) + '점';
+     $('over').hidden = false;

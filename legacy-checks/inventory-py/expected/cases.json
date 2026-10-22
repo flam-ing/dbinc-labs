@@ -1,0 +1,131 @@
+{
+  "about": "src/reorder.py(받은 원본)를 실제로 실행해서 기록한 결과예요. 고치지 않아요.",
+  "original": [
+    "src/reorder.py"
+  ],
+  "rules": [
+    "실행 위치는 verify.py가 있는 폴더예요. 명령 뒤에 args를 순서대로 붙여요.",
+    "args 속 {out}은 verify-out/<사례 이름>으로 바뀌어요. verify가 그 폴더를 비워서 미리 만들어 둬요.",
+    "비교하는 것: 종료 코드(exit), 화면 출력(stdout), {out} 폴더에 생긴 파일(files). stderr는 비교하지 않아요.",
+    "기대 파일 내용은 expected/<사례 이름>/files/ 아래에 있어요. files에 없는 파일이 생겨도 FAIL이에요.",
+    "글자는 UTF-8로 비교해요. 줄바꿈(CRLF와 LF) 차이와 파일 끝 빈 줄은 같게 봐요."
+  ],
+  "cases": [
+    {
+      "name": "basic",
+      "note": "보통 날. 2015-11-02(월) 아침 발주",
+      "inputs": [
+        "data/stock.csv",
+        "data/sales.csv",
+        "data/suppliers.csv"
+      ],
+      "args": [
+        "data/stock.csv",
+        "data/sales.csv",
+        "data/suppliers.csv",
+        "2015-11-02",
+        "{out}"
+      ],
+      "exit": 0,
+      "stdout": "basic/stdout.txt",
+      "files": [
+        "PO_20151102.csv"
+      ]
+    },
+    {
+      "name": "next-week",
+      "note": "같은 파일로 기준일만 한 주 뒤(2015-11-09). 판매 집계 기간이 옮겨 가요",
+      "inputs": [
+        "data/stock.csv",
+        "data/sales.csv",
+        "data/suppliers.csv"
+      ],
+      "args": [
+        "data/stock.csv",
+        "data/sales.csv",
+        "data/suppliers.csv",
+        "2015-11-09",
+        "{out}"
+      ],
+      "exit": 0,
+      "stdout": "next-week/stdout.txt",
+      "files": [
+        "PO_20151109.csv"
+      ]
+    },
+    {
+      "name": "no-sales",
+      "note": "판매 파일에 머리줄만 있는 날(판매 자료가 안 들어온 날)",
+      "inputs": [
+        "data/stock.csv",
+        "data/sales_empty.csv",
+        "data/suppliers.csv"
+      ],
+      "args": [
+        "data/stock.csv",
+        "data/sales_empty.csv",
+        "data/suppliers.csv",
+        "2015-11-02",
+        "{out}"
+      ],
+      "exit": 0,
+      "stdout": "no-sales/stdout.txt",
+      "files": [
+        "PO_20151102.csv"
+      ]
+    },
+    {
+      "name": "bad-date",
+      "note": "기준일을 2015/11/02처럼 슬래시로 줬을 때",
+      "inputs": [
+        "data/stock.csv",
+        "data/sales.csv",
+        "data/suppliers.csv"
+      ],
+      "args": [
+        "data/stock.csv",
+        "data/sales.csv",
+        "data/suppliers.csv",
+        "2015/11/02",
+        "{out}"
+      ],
+      "exit": 3,
+      "stdout": "bad-date/stdout.txt",
+      "files": []
+    },
+    {
+      "name": "missing-file",
+      "note": "재고 파일이 없을 때",
+      "inputs": [
+        "data/sales.csv",
+        "data/suppliers.csv"
+      ],
+      "args": [
+        "data/stock_none.csv",
+        "data/sales.csv",
+        "data/suppliers.csv",
+        "2015-11-02",
+        "{out}"
+      ],
+      "exit": 2,
+      "stdout": "missing-file/stdout.txt",
+      "files": []
+    },
+    {
+      "name": "no-args",
+      "note": "인자 없이 실행했을 때",
+      "inputs": [],
+      "args": [],
+      "exit": 1,
+      "stdout": "no-args/stdout.txt",
+      "files": []
+    }
+  ],
+  "recorded_with": "Python 3.14.6 (Darwin)",
+  "data_sha256": {
+    "data/sales.csv": "cfba808905f07ec50e5ef3634a0545eee02ed5757ac1d52ea8e62d19406bce75",
+    "data/sales_empty.csv": "922ae63729d74c7b309c7b93a3e62df5caaa56c30c7de842927e6c99217dae7c",
+    "data/stock.csv": "681013afe31dac799e8e5056558393e60f585bd379baf532db14159550daeb7a",
+    "data/suppliers.csv": "b32188531d093a7d655c1410a02a1fd004f0216c0c4b94d270028a38d8c69d47"
+  }
+}

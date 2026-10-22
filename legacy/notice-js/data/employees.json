@@ -1,0 +1,14 @@
+[
+  { "empNo": "E1001", "name": "김민준", "dept": "영업1팀", "channels": ["messenger", "mail"], "email": "e1001@nuri.example", "phone": "010-0000-1001", "active": true },
+  { "empNo": "E1002", "name": "박지호", "dept": "영업1팀", "channels": ["messenger", "mail", "sms"], "email": "e1002@nuri.example", "phone": "010-0000-1002", "active": true },
+  { "empNo": "E1003", "name": "최서윤", "dept": "영업2팀", "channels": ["messenger"], "email": "e1003@nuri.example", "phone": "010-0000-1003", "active": true },
+  { "empNo": "E1004", "name": "정예준", "dept": "재무팀", "channels": ["mail", "sms"], "email": "e1004@nuri.example", "phone": "010-0000-1004", "active": true },
+  { "empNo": "E1005", "name": "강하린", "dept": "재무팀", "channels": ["messenger", "mail"], "email": "", "phone": "010-0000-1005", "active": true },
+  { "empNo": "E1006", "name": "조시우", "dept": "IT팀", "channels": ["messenger", "mail", "sms"], "email": "e1006@nuri.example", "phone": "010-0000-1006", "active": true },
+  { "empNo": "E1007", "name": "윤지아", "dept": "영업1팀", "channels": ["messenger", "mail"], "email": "e1007@nuri.example", "phone": "010-0000-1007", "active": true },
+  { "empNo": "E1007", "name": "윤지아", "dept": "영업2팀", "channels": ["messenger", "mail"], "email": "e1007@nuri.example", "phone": "010-0000-1007", "active": true },
+  { "empNo": "E1008", "name": "장도현", "dept": "IT팀", "channels": [], "email": "e1008@nuri.example", "phone": "010-0000-1008", "active": true },
+  { "empNo": "E1009", "name": "임수아", "dept": "총무팀", "email": "e1009@nuri.example", "phone": "010-0000-1009", "active": true },
+  { "empNo": "E1010", "name": "한주원", "dept": "영업2팀", "channels": ["messenger", "mail"], "email": "e1010@nuri.example", "phone": "010-0000-1010", "active": false },
+  { "empNo": "E1011", "name": "오은우", "dept": "총무팀", "channels": ["messenger", "mail", "sms"], "email": "e1011@nuri.example", "active": true }
+]

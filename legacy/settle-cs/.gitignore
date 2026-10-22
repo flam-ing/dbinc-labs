@@ -1,0 +1,9 @@
+# dotnet build, dotnet run으로 생기는 결과
+src/bin/
+src/obj/
+# Java로 옮길 때 생기는 컴파일 결과와 성능 측정용 큰 입력
+*.class
+out/
+big/
+# 파이썬 캐시
+__pycache__/

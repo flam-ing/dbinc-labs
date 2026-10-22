@@ -1,0 +1,16 @@
+{
+  "req_id": "BT-2019-0110",
+  "emp_no": "N2388",
+  "name": "임서준",
+  "dept": "영업1팀",
+  "grade": "대리",
+  "trip_type": "DOMESTIC",
+  "city": "대구",
+  "purpose": "대구 대리점 방문",
+  "depart": "2019-07-04",
+  "return": "2019-07-05",
+  "receipts": [
+    {"type": "TRAIN", "date": "2019-07-04", "amount": 43500, "currency": "KRW", "desc": "KTX 서울-동대구"},
+    {"type": "HOTEL", "date": "2019-07-05", "amount": 72000, "currency": "KRW", "desc": "1박"},
+  ]
+}

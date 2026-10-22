@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(/api/src/test/**)",
+      "Edit(/hooks/**)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/gate.py\" --cwd api -- ./gradlew test -q",
+            "timeout": 300
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/hooks/gate.py\" --cwd api -- ./gradlew test -q",
+            "timeout": 300
+          }
+        ]
+      }
+    ]
+  }
+}

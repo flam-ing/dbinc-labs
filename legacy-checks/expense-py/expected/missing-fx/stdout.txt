@@ -1,0 +1,1 @@
+환율 파일 없음: data/fx_none.json

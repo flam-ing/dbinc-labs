@@ -1,0 +1,7 @@
+{
+  "session_id": "sample-session",
+  "transcript_path": "/tmp/sample-transcript.jsonl",
+  "cwd": "/Users/me/dbinc-ai-course/labs/day2",
+  "hook_event_name": "Stop",
+  "stop_hook_active": true
+}

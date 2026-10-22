@@ -1,0 +1,12 @@
+{
+  "session_id": "sample-session",
+  "transcript_path": "/tmp/sample-transcript.jsonl",
+  "cwd": "/Users/me/dbinc-ai-course/labs/day2",
+  "hook_event_name": "PostToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "/Users/me/dbinc-ai-course/labs/day2/artifacts/debug-note.md",
+    "content": "# 메모"
+  },
+  "tool_response": {"filePath": "/Users/me/dbinc-ai-course/labs/day2/artifacts/debug-note.md", "type": "create"}
+}

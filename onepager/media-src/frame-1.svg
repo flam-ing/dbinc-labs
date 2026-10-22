@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <rect width="640" height="360" fill="#1f2a3a"/>
+  <g fill="#2a78d6" opacity="0.9">
+    <rect x="404" y="210" width="28" height="90" rx="4"/>
+    <rect x="444" y="196" width="28" height="104" rx="4"/>
+    <rect x="484" y="202" width="28" height="98" rx="4"/>
+    <rect x="524" y="170" width="28" height="130" rx="4"/>
+    <rect x="564" y="206" width="28" height="94" rx="4"/>
+  </g>
+  <text x="48" y="120" fill="#eb6834" font-family="Apple SD Gothic Neo, Malgun Gothic, sans-serif" font-size="30" font-weight="700">41주 하이라이트</text>
+  <text x="48" y="200" fill="#ffffff" font-family="Apple SD Gothic Neo, Malgun Gothic, sans-serif" font-size="56" font-weight="800">요청 183만 건</text>
+  <text x="48" y="246" fill="#c9d3e0" font-family="Apple SD Gothic Neo, Malgun Gothic, sans-serif" font-size="24">10월 5일 ~ 10월 11일</text>
+</svg>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>게임 포스터 원본</title>
+<!-- 샘플 게임의 시작 화면 포스터(media/poster.png) 원본이에요.
+     교안 그림(assets/cut/rabbit.webp, carrot.webp)을 하늘과 언덕 위에 배치하고, Chrome으로 1280×720 PNG로 찍었어요.
+     글자는 넣지 않아요(포스터 프롬프트의 no text와 같은 조건). -->
+<style>
+  html, body { margin: 0; width: 1280px; height: 720px; overflow: hidden; }
+  .bg { position: absolute; inset: 0; background: linear-gradient(#bfe3ff 0%, #e6f3ff 45%, #fff3e3 100%); }
+  .sun { position: absolute; right: 90px; top: 60px; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle at 40% 40%, #ffd29b, #ff9a3c); box-shadow: 0 0 80px rgba(255, 154, 60, .55); }
+  .cloud { position: absolute; background: #fff; border-radius: 60px; opacity: .9; }
+  .hill { position: absolute; border-radius: 50%; }
+  .h1 { left: -200px; top: 470px; width: 900px; height: 520px; background: #a9dc8f; }
+  .h2 { left: 520px; top: 500px; width: 1000px; height: 520px; background: #93cf7b; }
+  .h3 { left: 180px; top: 560px; width: 980px; height: 400px; background: #b9e6a0; }
+  img { position: absolute; display: block; }
+  .rabbit { left: 455px; top: 250px; width: 400px; height: 400px; filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .18)); }
+  .c { width: 150px; height: 150px; filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .15)); }
+  .c1 { left: 150px; top: 40px; transform: rotate(28deg); }
+  .c2 { left: 380px; top: -24px; width: 110px; height: 110px; transform: rotate(38deg); }
+  .c3 { left: 800px; top: 30px; transform: rotate(24deg); }
+  .c4 { left: 1000px; top: 290px; width: 120px; height: 120px; transform: rotate(34deg); }
+  .c5 { left: 240px; top: 290px; width: 120px; height: 120px; transform: rotate(30deg); }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="sun"></div>
+  <div class="cloud" style="left:80px;top:150px;width:180px;height:56px"></div>
+  <div class="cloud" style="left:640px;top:90px;width:220px;height:64px"></div>
+  <div class="hill h1"></div><div class="hill h2"></div><div class="hill h3"></div>
+  <img class="c c1" src="../../../../assets/cut/carrot.webp" alt="">
+  <img class="c c2" src="../../../../assets/cut/carrot.webp" alt="">
+  <img class="c c3" src="../../../../assets/cut/carrot.webp" alt="">
+  <img class="c c4" src="../../../../assets/cut/carrot.webp" alt="">
+  <img class="c c5" src="../../../../assets/cut/carrot.webp" alt="">
+  <img class="rabbit" src="../../../../assets/cut/rabbit.webp" alt="">
+</body>
+</html>

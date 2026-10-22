@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 tools/gb.py list *)",
+      "Bash(python tools/gb.py list *)",
+      "mcp__claude_ai_Google_Drive__search_files"
+    ],
+    "ask": [
+      "Bash(python3 tools/gb.py write *)",
+      "Bash(python tools/gb.py write *)",
+      "mcp__claude_ai_Google_Drive__create_file"
+    ],
+    "deny": [
+      "mcp__claude_ai_Google_Drive__trash_file",
+      "Bash(sqlite3 *)"
+    ]
+  }
+}

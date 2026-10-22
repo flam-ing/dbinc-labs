@@ -1,0 +1,21 @@
+{
+  "req_id": "BT-2019-0104",
+  "emp_no": "N3302",
+  "name": "최유진",
+  "dept": "해외영업팀",
+  "grade": "과장",
+  "trip_type": "OVERSEAS",
+  "city": "도쿄",
+  "purpose": "일본 대리점 연간 계약",
+  "depart": "2019-06-16",
+  "return": "2019-06-19",
+  "submitted": "2019-06-21",
+  "receipts": [
+    {"type": "AIR", "date": "2019-06-03", "amount": 412300, "currency": "KRW", "desc": "왕복 항공권"},
+    {"type": "HOTEL", "date": "2019-06-19", "amount": 54000, "currency": "JPY", "desc": "3박"},
+    {"type": "TRAIN", "date": "2019-06-17", "amount": 2420, "currency": "JPY", "desc": "지하철"},
+    {"type": "TAXI", "date": "2019-06-18", "amount": 4860, "currency": "JPY", "desc": "대리점-호텔"},
+    {"type": "MEAL", "date": "2019-06-18", "amount": 3200, "currency": "JPY", "receipt": false, "desc": "식대(영수증 없음)"}
+  ],
+  "memo": "일요일 출발이라 환율은 금요일 것으로 부탁드립니다."
+}

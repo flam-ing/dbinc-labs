@@ -1,0 +1,15 @@
+<!--
+  원래는 Visual Studio 2005 프로젝트(.NET Framework 2.0)였음.
+  2024-05 Java 전환 검토 때 .NET 8 SDK로 빌드되게 프로젝트 파일만 새로 만듦. 소스(DailySettle.cs)는 손대지 않음.
+  실행 방법은 README 참고.
+-->
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <InvariantGlobalization>false</InvariantGlobalization>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+</Project>

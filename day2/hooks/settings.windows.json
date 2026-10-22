@@ -1,0 +1,27 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/hooks/run_tests.py\" tests --impl work/tdd/report.py -q",
+            "timeout": 120
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"$CLAUDE_PROJECT_DIR/hooks/run_tests.py\" tests --impl work/tdd/report.py -q",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}

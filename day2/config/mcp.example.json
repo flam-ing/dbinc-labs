@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "dbinc-training-events": {
+      "type": "stdio",
+      "command": "<가상환경 python의 절대 경로>",
+      "args": ["<실습 폴더 server.py의 절대 경로>"]
+    }
+  }
+}

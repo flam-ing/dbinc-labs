@@ -1,0 +1,9 @@
+검사 대상: http://127.0.0.1:8080 (켜 둔 서버. 재시작 뒤 기록 유지는 직접 확인하고, 검사용 기록 3개가 남습니다)
+test_http_contract (__main__.RunningServerContractTest.test_http_contract) ... ok
+test_unknown_paths (__main__.RunningServerContractTest.test_unknown_paths) ... ok
+test_validation_rejects_without_inserting (__main__.RunningServerContractTest.test_validation_rejects_without_inserting) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.045s
+
+OK

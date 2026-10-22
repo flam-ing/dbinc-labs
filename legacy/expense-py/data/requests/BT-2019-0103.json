@@ -1,0 +1,18 @@
+{
+  "req_id": "BT-2019-0103",
+  "emp_no": "N1877",
+  "name": "박지훈",
+  "dept": "품질팀",
+  "grade": "차장",
+  "trip_type": "DOMESTIC",
+  "city": "대전",
+  "purpose": "협력사 품질 점검",
+  "depart": "2019-07-02",
+  "return": "2019-07-02",
+  "submitted": "2019-07-03",
+  "receipts": [
+    {"type": "TRAIN", "date": "2019-07-02", "amount": 23700, "currency": "KRW", "desc": "KTX 서울-대전"},
+    {"type": "TAXI", "date": "2019-07-02", "amount": 8900, "currency": "KRW", "desc": "대전역-협력사"},
+    {"type": "TRAIN", "date": "2019-07-02", "amount": 23700, "currency": "KRW", "desc": "KTX 대전-서울"}
+  ]
+}

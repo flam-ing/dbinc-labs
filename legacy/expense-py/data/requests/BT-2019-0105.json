@@ -1,0 +1,20 @@
+{
+  "req_id": "BT-2019-0105",
+  "emp_no": "N2045",
+  "name": "정하준",
+  "dept": "해외영업팀",
+  "grade": "부장",
+  "trip_type": "OVERSEAS",
+  "city": "뉴욕",
+  "purpose": "북미 바이어 미팅",
+  "depart": "2019-06-10",
+  "return": "2019-06-15",
+  "submitted": "2019-06-18",
+  "receipts": [
+    {"type": "AIR", "date": "2019-05-20", "amount": 1876000, "currency": "KRW", "desc": "왕복 항공권"},
+    {"type": "HOTEL", "date": "2019-06-15", "amount": 1489.50, "currency": "USD", "desc": "5박"},
+    {"type": "TAXI", "date": "2019-06-10", "amount": 45.00, "currency": "USD", "desc": "공항-호텔"},
+    {"type": "MEAL", "date": "2019-06-12", "amount": 64.80, "currency": "USD", "desc": "바이어 저녁"},
+    {"type": "ETC", "date": "2019-06-14", "amount": 35.00, "currency": "USD", "receipt": false, "desc": "세탁"}
+  ]
+}

@@ -1,0 +1,13 @@
+diff --git a/static/index.html b/static/index.html
+index 8ba6689..a41624c 100644
+--- a/static/index.html
++++ b/static/index.html
+@@ -6,6 +6,8 @@
+   <title>DB Inc 교육 방명록</title>
+   <link rel="stylesheet" href="style.css">
+   <script src="app.js" defer></script>
++  <link rel="manifest" href="/manifest.webmanifest">
++  <script src="/pwa.js" defer></script>
+ </head>
+ <body>
+   <main>

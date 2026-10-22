@@ -1,0 +1,21 @@
+DAILY SETTLEMENT 2006-04-03
+=====================================================================================
+STORE   CNT       SALES    RETURN        CARD      CASH     POINT     FEE         NET
+-------------------------------------------------------------------------------------
+ST01      6      72,580     4,580      52,340    13,740     6,500   1,308      66,692
+ST02      4      55,100         0      33,600    12,340     9,160     840      54,260
+ST03      5      55,880     9,800      44,100    11,780         0   1,102      44,978
+ST04      4      48,580    12,000      37,580    11,000         0     940      35,640
+-------------------------------------------------------------------------------------
+TOTAL    19     232,140    26,380     167,620    48,860    15,660   4,190     201,570
+
+LOW STOCK (< 5)
+C-310          2
+D-410          2
+
+-- ERP UPLOAD
+INSERT INTO TB_DAILY_SETTLE (BIZ_DT, STORE_CD, SALES_AMT, RTN_AMT, FEE_AMT, NET_AMT) VALUES ('2006-04-03', 'ST01', 72580, 4580, 1308, 66692);
+INSERT INTO TB_DAILY_SETTLE (BIZ_DT, STORE_CD, SALES_AMT, RTN_AMT, FEE_AMT, NET_AMT) VALUES ('2006-04-03', 'ST02', 55100, 0, 840, 54260);
+INSERT INTO TB_DAILY_SETTLE (BIZ_DT, STORE_CD, SALES_AMT, RTN_AMT, FEE_AMT, NET_AMT) VALUES ('2006-04-03', 'ST03', 55880, 9800, 1102, 44978);
+INSERT INTO TB_DAILY_SETTLE (BIZ_DT, STORE_CD, SALES_AMT, RTN_AMT, FEE_AMT, NET_AMT) VALUES ('2006-04-03', 'ST04', 48580, 12000, 940, 35640);
+-- END

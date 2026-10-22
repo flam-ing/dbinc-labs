@@ -1,0 +1,58 @@
+{
+  "synthetic": true,
+  "date": "2026-11-23",
+  "page": 2,
+  "next": null,
+  "items": [
+    {
+      "sku": "PW-106",
+      "title": "무선 마우스 M3",
+      "category": "입력",
+      "price": {
+        "amount": 31400,
+        "list": 31400,
+        "currency": "KRW"
+      }
+    },
+    {
+      "sku": "PW-107",
+      "title": "USB-C 허브 7in1",
+      "category": "연결",
+      "price": {
+        "amount": 51400,
+        "list": 51400,
+        "currency": "KRW"
+      }
+    },
+    {
+      "sku": "PW-108",
+      "title": "웹캠 FHD",
+      "category": "영상",
+      "price": {
+        "amount": 68800,
+        "list": 72400,
+        "currency": "KRW"
+      }
+    },
+    {
+      "sku": "PW-109",
+      "title": "모니터암 싱글",
+      "category": "사무",
+      "price": {
+        "amount": 79000,
+        "list": 79000,
+        "currency": "KRW"
+      }
+    },
+    {
+      "sku": "PW-110",
+      "title": "노트북 거치대",
+      "category": "사무",
+      "price": {
+        "amount": 35000,
+        "list": 35000,
+        "currency": "KRW"
+      }
+    }
+  ]
+}

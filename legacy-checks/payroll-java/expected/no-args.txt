@@ -1,0 +1,1 @@
+사용법: java nuri.pay.PayMain 직원파일 근태파일 대상월(yyyy-MM)

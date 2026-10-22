@@ -1,0 +1,56 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '4.1.1'
+	id 'io.spring.dependency-management' version '1.1.7'
+	id 'jacoco'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+// JDK 17 이상이면 어느 버전이든 돌아가요.
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+	// 실패한 테스트 이름과 이유를 보여 줘요. -q로 돌려도 보여요.
+	testLogging {
+		events 'failed'
+		exceptionFormat = 'full'
+		showStackTraces = false
+		quiet {
+			events 'failed'
+			exceptionFormat = 'full'
+			showStackTraces = false
+		}
+	}
+}
+
+// 테스트가 통과해야 jar를 만들어요.
+tasks.named('bootJar') {
+	dependsOn 'test'
+}
+
+// 실행용 jar 하나만 만들어요(plain jar는 꺼요).
+tasks.named('jar') {
+	enabled = false
+}
+
+// 테스트가 코드의 어느 줄을 지나갔는지(커버리지) 보고서를 만들어요.
+jacocoTestReport {
+	reports {
+		html.required = true
+	}
+}

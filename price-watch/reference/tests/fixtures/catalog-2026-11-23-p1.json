@@ -1,0 +1,58 @@
+{
+  "synthetic": true,
+  "date": "2026-11-23",
+  "page": 1,
+  "next": 2,
+  "items": [
+    {
+      "sku": "PW-101",
+      "title": "무선 이어폰 A1",
+      "category": "오디오",
+      "price": {
+        "amount": 59600,
+        "list": 59600,
+        "currency": "KRW"
+      }
+    },
+    {
+      "sku": "PW-102",
+      "title": "블루투스 스피커 S2",
+      "category": "오디오",
+      "price": {
+        "amount": 45900,
+        "list": 45900,
+        "currency": "KRW"
+      }
+    },
+    {
+      "sku": "PW-103",
+      "title": "보조배터리 10000",
+      "category": "전원",
+      "price": {
+        "amount": 33000,
+        "list": 33000,
+        "currency": "KRW"
+      }
+    },
+    {
+      "sku": "PW-104",
+      "title": "고속 충전기 65W",
+      "category": "전원",
+      "price": {
+        "amount": 43100,
+        "list": 43100,
+        "currency": "KRW"
+      }
+    },
+    {
+      "sku": "PW-105",
+      "title": "기계식 키보드 K87",
+      "category": "입력",
+      "price": {
+        "amount": 87200,
+        "list": 87200,
+        "currency": "KRW"
+      }
+    }
+  ]
+}

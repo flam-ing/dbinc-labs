@@ -1,0 +1,6 @@
+# 직접 실행하거나 다른 언어로 옮길 때 생기는 결과
+/out/
+/vendor/
+node_modules/
+__pycache__/
+*.pyc

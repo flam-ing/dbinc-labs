@@ -1,0 +1,11 @@
+member_id,name,grade,email,join_dt,ad_agree
+M1001,김민준,VIP,minjun.kim@example.com,2014-03-02,Y
+M1002,이서연,NORMAL,seoyeon.lee@example.com,2015-07-11,N
+M1003,박지훈,NORMAL,jihoon.park@example.com,2016-01-05,Y
+M1004,최유나,VIP,yuna.choi@example.com,2013-11-20,N
+M1005,정우진,STAFF,woojin.jung@nuri.example,2012-02-01,Y
+M1006,윤서준,vip,seojun.yoon@example.com,2016-02-14,Y
+M1007,강하은,,haeun.kang@example.com,2015-09-03,N
+M1008,조현우,NORMAL,,2016-01-20,Y
+M1009,임도윤,NORMAL,doyun.lim@example.com,2015-06-05,N
+M1010,오유진,VIP,yujin.oh@example.com,2015-09-09,Y

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <rect width="640" height="360" fill="#eef4fc"/>
+  <path d="M430 270h150" stroke="#2a78d6" stroke-width="10" stroke-linecap="round"/>
+  <path d="M540 230l40 40-40 40" fill="none" stroke="#2a78d6" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="48" y="120" fill="#2a78d6" font-family="Apple SD Gothic Neo, Malgun Gothic, sans-serif" font-size="30" font-weight="700">다음 주</text>
+  <text x="48" y="194" fill="#0b0b0b" font-family="Apple SD Gothic Neo, Malgun Gothic, sans-serif" font-size="48" font-weight="800">결제 응답 시간 줄이기</text>
+  <text x="48" y="240" fill="#52514e" font-family="Apple SD Gothic Neo, Malgun Gothic, sans-serif" font-size="24">배포 전 점검 목록도 만들어요</text>
+</svg>

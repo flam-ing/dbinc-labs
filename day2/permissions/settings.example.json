@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__dbinc-training-events__get_services",
+      "mcp__dbinc-training-events__query_events",
+      "mcp__dbinc-training-admin__count_events"
+    ],
+    "ask": [
+      "Bash(git push *)"
+    ],
+    "deny": [
+      "mcp__dbinc-training-admin__delete_event",
+      "Edit(./fixtures/**)",
+      "Edit(./work/admin/**)"
+    ]
+  }
+}

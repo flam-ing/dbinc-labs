@@ -1,0 +1,13 @@
+diff --git a/extension/popup.js b/extension/popup.js
+index 7edebaf..a14066b 100644
+--- a/extension/popup.js
++++ b/extension/popup.js
+@@ -10,7 +10,7 @@ async function render() {
+     if (!response.ok) throw new Error(String(response.status));
+     const { entries } = await response.json();
+     list.replaceChildren();
+-    for (const entry of entries.slice(0, 5)) {
++    for (const entry of entries.slice(0, 3)) {
+       const item = document.createElement('li');
+       const name = document.createElement('b');
+       name.textContent = entry.name;

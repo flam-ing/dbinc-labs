@@ -1,0 +1,12 @@
+/* 연습몰 화면 모양. 수집기는 이 파일을 읽지 않아요. */
+body { font-family: system-ui, sans-serif; max-width: 920px; margin: 24px auto; padding: 0 16px; color: #1f2328; background: #fff; }
+.notice { background: #fff4e5; border: 1px solid #f5c27a; padding: 6px 10px; border-radius: 6px; font-size: 14px; }
+nav { margin: 12px 0; } nav a { color: #b45309; }
+.today { color: #57606a; font-size: 14px; }
+.product-list { list-style: none; padding: 0; } .product { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid #eee; }
+.product .name { flex: 1; } .price, strong { font-weight: 700; } .list-price, del { color: #8c959f; }
+.badge, .card__tag { background: #ffedd5; color: #9a3412; border-radius: 999px; padding: 0 8px; font-size: 12px; margin-left: 6px; }
+.grid, #list, #app { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.card { border: 1px solid #eee; border-radius: 10px; padding: 12px; } .card__cat { color: #57606a; font-size: 12px; margin: 0; }
+.card h3 { font-size: 16px; margin: 6px 0; } .loading { color: #57606a; }
+.news { border-bottom: 1px solid #eee; padding: 8px 0; } .news h2 { font-size: 17px; margin: 0; } .meta { color: #57606a; font-size: 13px; }

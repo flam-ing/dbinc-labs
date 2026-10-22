@@ -1,0 +1,10 @@
+[
+  {"id":"evt-001","service":"billing","status":200,"latency_ms":120},
+  {"id":"evt-002","service":"billing","status":500,"latency_ms":500},
+  {"id":"evt-003","service":"billing","status":503,"latency_ms":900},
+  {"id":"evt-004","service":"catalog","status":200,"latency_ms":90},
+  {"id":"evt-005","service":"catalog","status":404,"latency_ms":499},
+  {"id":"evt-006","service":"catalog","status":200,"latency_ms":500},
+  {"id":"evt-007","service":"identity","status":401,"latency_ms":80},
+  {"id":"evt-008","service":"identity","status":500,"latency_ms":600}
+]

@@ -1,0 +1,9 @@
+교육용 고의 버그의 실제 재현 출력
+명령: python tools/reproduce.py --impl buggy/report.py
+
+ERROR 없는 서비스: ZeroDivisionError: division by zero
+FAIL 오류 비율의 분모: actual=(2, 25.0, 1) expected=(2, 66.67, 2)
+FAIL 404와 500ms 경계: actual=(1, 12.5, 0) expected=(0, 0.0, 1)
+재현 실패 사례: 3/3
+
+exit_code=1

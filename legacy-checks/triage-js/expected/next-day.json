@@ -1,0 +1,142 @@
+[
+  {
+    "id": "T-24101",
+    "category": "장애",
+    "urgency": "P1",
+    "score": 8,
+    "team": "IT운영팀",
+    "receivedAt": "2020-09-28 09:12",
+    "deadline": "2020-09-28 11:12",
+    "overdue": true
+  },
+  {
+    "id": "T-24106",
+    "category": "결제",
+    "urgency": "P1",
+    "score": 7,
+    "team": "결제지원팀",
+    "receivedAt": "2020-10-02 15:00",
+    "deadline": "2020-10-02 17:00",
+    "overdue": true
+  },
+  {
+    "id": "T-24114",
+    "category": "배송",
+    "urgency": "P1",
+    "score": 9,
+    "team": "물류CS팀",
+    "receivedAt": "2020-10-05 09:50",
+    "deadline": "2020-10-05 11:50",
+    "overdue": true
+  },
+  {
+    "id": "T-24104",
+    "category": "장애",
+    "urgency": "P2",
+    "score": 5,
+    "team": "IT운영팀",
+    "receivedAt": "2020-09-29 16:20",
+    "deadline": "2020-10-05 11:20",
+    "overdue": true
+  },
+  {
+    "id": "T-24107",
+    "category": "배송",
+    "urgency": "P2",
+    "score": 5,
+    "team": "VIP전담팀",
+    "receivedAt": "2020-10-03 11:00",
+    "deadline": "2020-10-05 13:00",
+    "overdue": true
+  },
+  {
+    "id": "T-24108",
+    "category": "장애",
+    "urgency": "P2",
+    "score": 6,
+    "team": "IT운영팀",
+    "receivedAt": "2020-10-05 08:30",
+    "deadline": "2020-10-05 13:00",
+    "overdue": true
+  },
+  {
+    "id": "T-24110",
+    "category": "장애",
+    "urgency": "P2",
+    "score": 6,
+    "team": "IT운영팀",
+    "receivedAt": "2020-09-29 11:00",
+    "deadline": "2020-09-29 15:00",
+    "overdue": true
+  },
+  {
+    "id": "T-24103",
+    "category": "배송",
+    "urgency": "P3",
+    "score": 3,
+    "team": "물류CS팀",
+    "receivedAt": "2020-09-29 17:30",
+    "deadline": "2020-10-05 17:30",
+    "overdue": true
+  },
+  {
+    "id": "T-24103",
+    "category": "배송",
+    "urgency": "P3",
+    "score": 3,
+    "team": "물류CS팀",
+    "receivedAt": "2020-09-29 17:30",
+    "deadline": "2020-10-05 17:30",
+    "overdue": true
+  },
+  {
+    "id": "T-24102",
+    "category": "결제",
+    "urgency": "P4",
+    "score": 2,
+    "team": "결제지원팀",
+    "receivedAt": "2020-09-28 10:30",
+    "deadline": "2020-10-06 10:30",
+    "overdue": true
+  },
+  {
+    "id": "T-24105",
+    "category": "계정",
+    "urgency": "P4",
+    "score": 1,
+    "team": "회원지원팀",
+    "receivedAt": "2020-10-05 00:40",
+    "deadline": "2020-10-07 18:00",
+    "overdue": false
+  },
+  {
+    "id": "T-24109",
+    "category": "기타",
+    "urgency": "P4",
+    "score": 0,
+    "team": "고객상담1팀",
+    "receivedAt": "2020-09-28 18:30",
+    "deadline": "2020-10-06 18:00",
+    "overdue": false
+  },
+  {
+    "id": "T-24113",
+    "category": "기타",
+    "urgency": "P4",
+    "score": 0,
+    "team": "고객상담1팀",
+    "receivedAt": "-",
+    "deadline": "-",
+    "overdue": false
+  },
+  {
+    "id": "T-24115",
+    "category": "결제",
+    "urgency": "P4",
+    "score": 2,
+    "team": "결제지원팀",
+    "receivedAt": "2020-09-29 13:00",
+    "deadline": "2020-10-07 13:00",
+    "overdue": false
+  }
+]

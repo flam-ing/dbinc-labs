@@ -1,0 +1,162 @@
+{
+  "about": "src/expense_batch.py(받은 원본)를 실제로 실행해서 기록한 결과예요. 고치지 않아요.",
+  "original": [
+    "src/expense_batch.py"
+  ],
+  "rules": [
+    "실행 위치는 verify.py가 있는 폴더예요. 명령 뒤에 args를 순서대로 붙여요.",
+    "args 속 {out}은 verify-out/<사례 이름>으로 바뀌어요. verify가 그 폴더를 비워서 미리 만들어 둬요.",
+    "비교하는 것: 종료 코드(exit), 화면 출력(stdout), {out} 폴더에 생긴 파일(files). stderr는 비교하지 않아요.",
+    "기대 파일 내용은 expected/<사례 이름>/files/ 아래에 있어요. files에 없는 파일이 생겨도 FAIL이에요.",
+    "글자는 UTF-8로 비교해요. 줄바꿈(CRLF와 LF) 차이와 파일 끝 빈 줄은 같게 봐요. 결과 CSV 맨 앞의 BOM(\\ufeff)도 비교해요."
+  ],
+  "cases": [
+    {
+      "name": "basic",
+      "note": "보통 정산일(2019-07-15). 신청서 14개, 그중 하나는 깨진 파일",
+      "inputs": [
+        "data/requests",
+        "data/fx_rates.json"
+      ],
+      "args": [
+        "data/requests",
+        "data/fx_rates.json",
+        "2019-07-15",
+        "{out}"
+      ],
+      "exit": 0,
+      "stdout": "basic/stdout.txt",
+      "files": [
+        "audit.log",
+        "outbox/BT-2019-0101.html",
+        "outbox/BT-2019-0102.html",
+        "outbox/BT-2019-0103.html",
+        "outbox/BT-2019-0104.html",
+        "outbox/BT-2019-0105.html",
+        "outbox/BT-2019-0106.html",
+        "outbox/BT-2019-0107.html",
+        "outbox/BT-2019-0108.html",
+        "outbox/BT-2019-0109.html",
+        "outbox/BT-2019-0111.html",
+        "outbox/BT-2019-0112.html",
+        "outbox/BT-2019-0113.html",
+        "outbox/BT-2019-0114.html",
+        "settlement_20190715.csv"
+      ]
+    },
+    {
+      "name": "late-run",
+      "note": "같은 신청서를 말일(2019-07-31)에 정산. 30일 기한을 넘긴 신청이 늘어요",
+      "inputs": [
+        "data/requests",
+        "data/fx_rates.json"
+      ],
+      "args": [
+        "data/requests",
+        "data/fx_rates.json",
+        "2019-07-31",
+        "{out}"
+      ],
+      "exit": 0,
+      "stdout": "late-run/stdout.txt",
+      "files": [
+        "audit.log",
+        "outbox/BT-2019-0101.html",
+        "outbox/BT-2019-0102.html",
+        "outbox/BT-2019-0103.html",
+        "outbox/BT-2019-0104.html",
+        "outbox/BT-2019-0105.html",
+        "outbox/BT-2019-0106.html",
+        "outbox/BT-2019-0107.html",
+        "outbox/BT-2019-0108.html",
+        "outbox/BT-2019-0109.html",
+        "outbox/BT-2019-0111.html",
+        "outbox/BT-2019-0112.html",
+        "outbox/BT-2019-0113.html",
+        "outbox/BT-2019-0114.html",
+        "settlement_20190731.csv"
+      ]
+    },
+    {
+      "name": "empty-folder",
+      "note": "신청서가 하나도 없는 날",
+      "inputs": [
+        "data/requests_empty",
+        "data/fx_rates.json"
+      ],
+      "args": [
+        "data/requests_empty",
+        "data/fx_rates.json",
+        "2019-07-15",
+        "{out}"
+      ],
+      "exit": 0,
+      "stdout": "empty-folder/stdout.txt",
+      "files": [
+        "audit.log",
+        "settlement_20190715.csv"
+      ]
+    },
+    {
+      "name": "missing-fx",
+      "note": "환율 파일이 없을 때",
+      "inputs": [
+        "data/requests"
+      ],
+      "args": [
+        "data/requests",
+        "data/fx_none.json",
+        "2019-07-15",
+        "{out}"
+      ],
+      "exit": 2,
+      "stdout": "missing-fx/stdout.txt",
+      "files": []
+    },
+    {
+      "name": "bad-date",
+      "note": "정산일이 없는 날짜(2019-13-01)일 때",
+      "inputs": [
+        "data/requests",
+        "data/fx_rates.json"
+      ],
+      "args": [
+        "data/requests",
+        "data/fx_rates.json",
+        "2019-13-01",
+        "{out}"
+      ],
+      "exit": 3,
+      "stdout": "bad-date/stdout.txt",
+      "files": []
+    },
+    {
+      "name": "no-args",
+      "note": "인자 없이 실행했을 때",
+      "inputs": [],
+      "args": [],
+      "exit": 1,
+      "stdout": "no-args/stdout.txt",
+      "files": []
+    }
+  ],
+  "recorded_with": "Python 3.14.6 (Darwin)",
+  "data_sha256": {
+    "data/fx_rates.json": "587cd3de3e6af66454c07654768a7e61947923eb9323d69ff892797c15195fdc",
+    "data/requests/BT-2019-0101.json": "3ae9a91bb5842585e5498a4a3c5c78c76fed64f8406f6282f651c3bbf81bb5ac",
+    "data/requests/BT-2019-0102.json": "b0263e145f10e88fc829cc70f66ef9a3df7f10d96cf8fbe1ab2aee8cf26d044c",
+    "data/requests/BT-2019-0103.json": "12a3d73760cf21431507ba6dfd8bee3c8ce138f4eb6d808ffed952a051cb35a9",
+    "data/requests/BT-2019-0104.json": "333911dd2aaf0716f054725639d94c1b2ef952b56b7112e7d5744e4265841473",
+    "data/requests/BT-2019-0105.json": "42e2f5cafbea6fc9ae8365a72c06b80e843c9167b139487ed48ee91ffa9b5821",
+    "data/requests/BT-2019-0106.json": "5b0e931776402c0673e82a2717f03d1bca6c600ae3cfe0b844782501e6be3c5f",
+    "data/requests/BT-2019-0107.json": "280014f02b12f2ae2004d8772185db12c7ebe722d1db7b664842ad6a8c5af0a6",
+    "data/requests/BT-2019-0108.json": "a79be103c70ac705b1e29b6688d4336c36e631fe8a706920819851f38afa3305",
+    "data/requests/BT-2019-0109.json": "65c37da7591ffe2cfcbb9911728057548c1cddf1be9f9cf4820f0298ab1b8c36",
+    "data/requests/BT-2019-0110.json": "58c0789cd68d458ead412ffd065c6da9321c1f7519ea293c1ad34f429c782faa",
+    "data/requests/BT-2019-0111.json": "d6b53324abc69540628fb17ae6e2cd478704c69a71faaf3c326b7ee6e85eb4e3",
+    "data/requests/BT-2019-0112.json": "06c9e3079f76e3751436c2eca4e41a5e4625f1eaccb22c684e2ddf9279303934",
+    "data/requests/BT-2019-0113.json": "85234f47c35d12088fb8c7f33acdede43420d9969ab3810c68decd26353ede7d",
+    "data/requests/BT-2019-0114.json": "8c0c6da847527fe4eae93f062c3053152d683391e8fbc46ecb9a41c3ba1d842d",
+    "data/requests_empty/README.txt": "5c43004d66b25fa51f7aa1bfb3e5432513c0bea1800d07966d05cf4e76f667ae"
+  }
+}

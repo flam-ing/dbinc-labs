@@ -1,0 +1,1 @@
+사용법: php batch.php <요청CSV> <기준일 YYYY-MM-DD> [데이터폴더]

@@ -1,0 +1,132 @@
+id,month,channel,style,main_color,font,impressions,clicks
+D-001,2024-01,SNS 카드,swiss,#111111,Inter,32000,358
+D-002,2024-01,랜딩,flat,#2a78d6,Pretendard,49000,773
+D-003,2024-01,배너,material,#1a73e8,Roboto,9000,121
+D-004,2024-01,배너,swiss,#111111,Inter,45000,902
+D-005,2024-01,앱 푸시 이미지,flat,#2a78d6,Pretendard,56000,1008
+D-006,2024-02,배너,flat,#2a78d6,Pretendard,15000,293
+D-007,2024-02,앱 푸시 이미지,flat,#2a78d6,Pretendard,18000,434
+D-008,2024-02,앱 푸시 이미지,swiss,#111111,Inter,8000,150
+D-009,2024-03,배너,neumorph,#e0e5ec,Pretendard,37000,637
+D-010,2024-03,랜딩,swiss,#111111,Inter,14000,262
+D-011,2024-03,SNS 카드,neumorph,#e0e5ec,Pretendard,32000,420
+D-012,2024-03,배너,swiss,#111111,Inter,49000,661
+D-013,2024-04,배너,material,#1a73e8,Roboto,54000,901
+D-014,2024-04,앱 푸시 이미지,swiss,#111111,Inter,52000,794
+D-015,2024-04,앱 푸시 이미지,neumorph,#e0e5ec,Pretendard,24000,380
+D-016,2024-05,앱 푸시 이미지,flat,#2a78d6,Pretendard,41000,672
+D-017,2024-05,랜딩,swiss,#111111,Inter,12000,229
+D-018,2024-05,랜딩,material,#1a73e8,Roboto,22000,412
+D-019,2024-05,랜딩,flat,#2a78d6,Pretendard,21000,456
+D-020,2024-05,SNS 카드,flat,#2a78d6,Pretendard,54000,967
+D-021,2024-06,랜딩,material,#1a73e8,Roboto,35000,458
+D-022,2024-06,앱 푸시 이미지,neumorph,#e0e5ec,Pretendard,40000,566
+D-023,2024-06,랜딩,swiss,#111111,Inter,32000,518
+D-024,2024-06,랜딩,pixel-retro,#ff4f9a,Galmuri,26000,527
+D-025,2024-06,앱 푸시 이미지,material,#1a73e8,Roboto,37000,617
+D-026,2024-07,배너,pixel-retro,#ff4f9a,Galmuri,28000,539
+D-027,2024-07,배너,material,#1a73e8,Roboto,24000,370
+D-028,2024-07,랜딩,pixel-retro,#ff4f9a,Galmuri,43000,713
+D-029,2024-08,배너,pixel-retro,#ff4f9a,Galmuri,10000,198
+D-030,2024-08,배너,pixel-retro,#ff4f9a,Galmuri,60000,1132
+D-031,2024-08,앱 푸시 이미지,flat,#2a78d6,Pretendard,59000,1022
+D-032,2024-08,앱 푸시 이미지,neumorph,#e0e5ec,Pretendard,29000,389
+D-033,2024-08,앱 푸시 이미지,material,#1a73e8,Roboto,10000,165
+D-034,2024-09,SNS 카드,neumorph,#e0e5ec,Pretendard,20000,336
+D-035,2024-09,배너,swiss,#111111,Inter,23000,356
+D-036,2024-09,SNS 카드,material,#1a73e8,Roboto,50000,449
+D-037,2024-10,랜딩,flat,#2a78d6,Pretendard,17000,311
+D-038,2024-10,앱 푸시 이미지,flat,#2a78d6,Pretendard,58000,1062
+D-039,2024-10,앱 푸시 이미지,neumorph,#e0e5ec,Pretendard,55000,996
+D-040,2024-11,SNS 카드,material,#1a73e8,Roboto,18000,390
+D-041,2024-11,앱 푸시 이미지,neumorph,#e0e5ec,Pretendard,47000,815
+D-042,2024-11,SNS 카드,flat,#2a78d6,Pretendard,17000,346
+D-043,2024-11,SNS 카드,swiss,#111111,Inter,23000,492
+D-044,2024-12,랜딩,neumorph,#e0e5ec,Pretendard,12000,219
+D-045,2024-12,랜딩,pixel-retro,#ff4f9a,Galmuri,60000,1201
+D-046,2024-12,배너,pixel-retro,#ff4f9a,Galmuri,47000,1062
+D-047,2024-12,앱 푸시 이미지,material,#1a73e8,Roboto,32000,544
+D-048,2025-01,배너,pixel-retro,#ff4f9a,Galmuri,44000,734
+D-049,2025-01,배너,material,#1a73e8,Roboto,58000,1032
+D-050,2025-01,SNS 카드,y2k,#b26bff,Pretendard,15000,266
+D-051,2025-01,배너,flat,#2a78d6,Pretendard,31000,629
+D-052,2025-02,앱 푸시 이미지,neumorph,#e0e5ec,Pretendard,53000,847
+D-053,2025-02,SNS 카드,pixel-retro,#ff4f9a,Galmuri,22000,378
+D-054,2025-02,앱 푸시 이미지,material,#1a73e8,Roboto,26000,419
+D-055,2025-02,앱 푸시 이미지,flat,#2a78d6,Pretendard,50000,775
+D-056,2025-02,랜딩,pixel-retro,#ff4f9a,Galmuri,33000,676
+D-057,2025-03,배너,pixel-retro,#ff4f9a,Galmuri,25000,623
+D-058,2025-03,배너,material,#1a73e8,Roboto,28000,521
+D-059,2025-03,배너,pixel-retro,#ff4f9a,Galmuri,36000,786
+D-060,2025-03,SNS 카드,neumorph,#e0e5ec,Pretendard,24000,424
+D-061,2025-04,랜딩,pixel-retro,#ff4f9a,Galmuri,23000,473
+D-062,2025-04,배너,y2k,#b26bff,Pretendard,59000,1191
+D-063,2025-04,배너,pixel-retro,#ff4f9a,Galmuri,57000,1244
+D-064,2025-04,SNS 카드,flat,#2a78d6,Pretendard,28000,478
+D-065,2025-04,배너,pixel-retro,#ff4f9a,Galmuri,39000,775
+D-066,2025-05,랜딩,flat,#2a78d6,Pretendard,29000,572
+D-067,2025-05,SNS 카드,neumorph,#e0e5ec,Pretendard,49000,898
+D-068,2025-05,앱 푸시 이미지,material,#1a73e8,Roboto,21000,335
+D-069,2025-06,앱 푸시 이미지,neumorph,#e0e5ec,Pretendard,33000,456
+D-070,2025-06,SNS 카드,pixel-retro,#ff4f9a,Galmuri,55000,977
+D-071,2025-06,배너,pixel-retro,#ff4f9a,Galmuri,30000,667
+D-072,2025-06,배너,pixel-retro,#ff4f9a,Galmuri,38000,1031
+D-073,2025-07,SNS 카드,swiss,#111111,Inter,9000,175
+D-074,2025-07,SNS 카드,y2k,#b26bff,Pretendard,57000,1220
+D-075,2025-07,배너,flat,#2a78d6,Pretendard,12000,266
+D-076,2025-08,SNS 카드,material,#1a73e8,Roboto,60000,1142
+D-077,2025-08,랜딩,material,#1a73e8,Roboto,39000,796
+D-078,2025-08,배너,pixel-retro,#ff4f9a,Galmuri,24000,450
+D-079,2025-08,앱 푸시 이미지,flat,#2a78d6,Pretendard,19000,329
+D-080,2025-09,SNS 카드,pixel-retro,#ff4f9a,Galmuri,31000,744
+D-081,2025-09,앱 푸시 이미지,y2k,#b26bff,Pretendard,36000,577
+D-082,2025-09,배너,neumorph,#e0e5ec,Pretendard,47000,634
+D-083,2025-10,앱 푸시 이미지,y2k,#b26bff,Pretendard,13000,284
+D-084,2025-10,랜딩,swiss,#111111,Inter,48000,1042
+D-085,2025-10,배너,glass,#7fd1ff,Pretendard,18000,440
+D-086,2025-11,SNS 카드,swiss,#111111,Inter,32000,574
+D-087,2025-11,배너,pixel-retro,#ff4f9a,Galmuri,26000,538
+D-088,2025-11,SNS 카드,swiss,#111111,Inter,24000,480
+D-089,2025-11,랜딩,y2k,#b26bff,Pretendard,13000,284
+D-090,2025-11,배너,neumorph,#e0e5ec,Pretendard,27000,487
+D-091,2025-12,SNS 카드,material,#1a73e8,Roboto,46000,602
+D-092,2025-12,랜딩,neumorph,#e0e5ec,Pretendard,39000,552
+D-093,2025-12,배너,flat,#2a78d6,Pretendard,13000,228
+D-094,2026-01,배너,neumorph,#e0e5ec,Pretendard,44000,695
+D-095,2026-01,SNS 카드,flat,#2a78d6,Pretendard,27000,425
+D-096,2026-01,SNS 카드,glass,#7fd1ff,Pretendard,57000,1544
+D-097,2026-01,SNS 카드,glass,#7fd1ff,Pretendard,16000,326
+D-098,2026-02,SNS 카드,flat,#2a78d6,Pretendard,56000,979
+D-099,2026-02,배너,material,#1a73e8,Roboto,42000,476
+D-100,2026-02,SNS 카드,glass,#7fd1ff,Pretendard,55000,1208
+D-101,2026-02,배너,glass,#7fd1ff,Pretendard,46000,1084
+D-102,2026-03,랜딩,material,#1a73e8,Roboto,39000,604
+D-103,2026-03,SNS 카드,glass,#7fd1ff,Pretendard,50000,1165
+D-104,2026-03,배너,y2k,#b26bff,Pretendard,54000,987
+D-105,2026-03,랜딩,flat,#2a78d6,Pretendard,36000,806
+D-106,2026-04,SNS 카드,material,#1a73e8,Roboto,15000,267
+D-107,2026-04,랜딩,glass,#7fd1ff,Pretendard,25000,601
+D-108,2026-04,SNS 카드,material,#1a73e8,Roboto,60000,1220
+D-109,2026-04,랜딩,flat,#2a78d6,Pretendard,32000,523
+D-110,2026-05,배너,y2k,#b26bff,Pretendard,45000,1029
+D-111,2026-05,SNS 카드,glass,#7fd1ff,Pretendard,47000,926
+D-112,2026-05,랜딩,glass,#7fd1ff,Pretendard,9000,232
+D-113,2026-05,배너,glass,#7fd1ff,Pretendard,8000,178
+D-114,2026-05,앱 푸시 이미지,y2k,#b26bff,Pretendard,32000,806
+D-115,2026-06,랜딩,neumorph,#e0e5ec,Pretendard,13000,167
+D-116,2026-06,SNS 카드,flat,#2a78d6,Pretendard,13000,192
+D-117,2026-06,SNS 카드,neumorph,#e0e5ec,Pretendard,40000,476
+D-118,2026-06,랜딩,y2k,#b26bff,Pretendard,51000,1094
+D-119,2026-06,SNS 카드,swiss,#111111,Inter,42000,888
+D-120,2026-07,배너,pixel-retro,#ff4f9a,Galmuri,14000,237
+D-121,2026-07,랜딩,glass,#7fd1ff,Pretendard,56000,1340
+D-122,2026-07,랜딩,skeuo,#8b5a2b,Noto Serif KR,27000,1006
+D-123,2026-07,SNS 카드,pixel-retro,#ff4f9a,Galmuri,41000,860
+D-124,2026-08,앱 푸시 이미지,glass,#7fd1ff,Pretendard,54000,1306
+D-125,2026-08,배너,glass,#7fd1ff,Pretendard,51000,1004
+D-126,2026-08,앱 푸시 이미지,material,#1a73e8,Roboto,44000,441
+D-127,2026-09,랜딩,flat,#2a78d6,Pretendard,9000,133
+D-128,2026-09,SNS 카드,neumorph,#e0e5ec,Pretendard,60000,855
+D-129,2026-09,랜딩,pixel-retro,#ff4f9a,Galmuri,11000,246
+D-130,2026-09,앱 푸시 이미지,material,#1a73e8,Roboto,8000,117
+D-131,2026-09,배너,glass,#7fd1ff,Pretendard,24000,612
