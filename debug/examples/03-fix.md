@@ -4,11 +4,11 @@
 
 | 항목 | 값 |
 | --- | --- |
-| 날짜 | 2026-10-17 |
-| Claude Code | 2.1.302 |
+| 날짜 | 2026-10-23 |
+| Claude Code | 2.1.309 |
 | 모델 | Sonnet 5.5 |
 | 모드 | Auto |
-| 걸린 시간 | 34초 |
+| 걸린 시간 | 24초 |
 
 ## 보낸 말
 
@@ -18,76 +18,74 @@
 
 ## Claude의 답 (그대로)
 
-이슈 #1을 고쳤고, `python3 -m unittest`는 8개 모두 통과했습니다.
+이슈 #1을 고쳤습니다. `cafe.py:75`의 `>`를 `>=`로 바꾼 한 줄이 전부입니다. 커밋은 하지 않았습니다.
 
-## 바꾼 것
-- `app.py:41`: `>=`를 `>`로 바꿨습니다. 이 줄만 고쳤습니다.
-- `tests/test_bugs.py` 새 파일:
-  - `test_이슈1_이름을_딱_40자로_쓰면_저장된다`: `가`×40과 `안녕하세요`를 보내 201을 기대합니다.
-  - `test_이슈1_이름이_41자면_400`: 상한이 그대로 유지되는지 봅니다.
+**회귀 테스트:** `tests/test_bugs.py`의 `Issue1Test`에 더했습니다. 이슈 입력 그대로 김하늘 님(M001, 누적 95,000원)이 5,000원을 냅니다. 마감 뒤 `total`이 100000, 등급이 `VIP`이고 영수증에 "VIP까지"가 없는지 봅니다.
 
-## 고치기 전 코드에서의 실패
-40자 테스트는 `AssertionError: 400 != 201`로 실패했고, 41자 테스트는 통과했습니다.
-
-## 고친 뒤 `python3 -m unittest -v`
+**고치기 전 코드에서 실행** (`python3 -m unittest tests.test_bugs`):
 ```
-test_글을_남기면_201과_번호를_준다 (tests.test_bugs.BugTest...) ... ok
-test_남긴_글이_목록에_나온다 (tests.test_bugs.BugTest...) ... ok
-test_이름이_비면_400 (tests.test_bugs.BugTest...) ... ok
-test_이슈1_이름을_딱_40자로_쓰면_저장된다 (tests.test_bugs.BugTest...) ... ok
-test_이슈1_이름이_41자면_400 (tests.test_bugs.BugTest...) ... ok
-test_글을_남기면_201과_번호를_준다 (tests.test_guestbook.GuestbookTest...) ... ok
-test_남긴_글이_목록에_나온다 (tests.test_guestbook.GuestbookTest...) ... ok
-test_이름이_비면_400 (tests.test_guestbook.GuestbookTest...) ... ok
+FAIL: test_누적이_딱_10만원이_되면_VIP가_된다
+AssertionError: '일반' != 'VIP'
+Ran 1 test in 0.020s
+FAILED (failures=1)
+```
 
-Ran 8 tests in 0.911s
+**고친 뒤 전체 실행** (`python3 -m unittest`):
+```
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.074s
+
 OK
 ```
 
-## 알아 둘 점
-- 기존 테스트가 두 번 돕니다. `BugTest`가 `GuestbookTest`를 상속해서 서버 띄우는 코드를 재사용하기 때문에, 기존 3개가 `BugTest` 쪽에서도 한 번 더 실행됩니다. 고유한 테스트는 5개입니다.
-- 내용 500자 경계는 확인하지 않았습니다. 같은 줄이라 함께 고쳐졌을 것으로 보이지만, 재현해 보거나 테스트를 넣지 않았습니다. 이슈 범위 밖이라 그대로 뒀습니다.
-- 브라우저 화면에서는 확인하지 않았습니다. API 요청과 테스트로만 확인했습니다.
-- 커밋과 PR은 만들지 않았습니다. `app.py` 수정과 `tests/test_bugs.py` 추가가 작업 트리에 남아 있습니다.
+기존 테스트는 지우거나 바꾸지 않았습니다. 고친 뒤에 `python3 cafe.py`를 다시 돌려 영수증을 눈으로 확인하지는 않았고, 확인은 테스트로만 했습니다.
+
+`cafe.py:33`의 `"vip"`와 `"VIP"` 불일치로 VIP 적립이 1%로 계산되는 문제는 그대로 있습니다. 별도 이슈로 올려 주세요.
 
 ## 바뀐 줄 (`git diff`)
 
 ```diff
-diff --git a/app.py b/app.py
-index 32c28f7..7f3c98a 100644
---- a/app.py
-+++ b/app.py
-@@ -39,7 +39,7 @@ def validate_entry(value):
-         if not isinstance(raw, str) or not raw.strip():
-             raise ValueError(f"{label}을 입력해 주세요.")
-         result[key] = raw.strip()
--        if len(result[key]) >= maximum:
-+        if len(result[key]) > maximum:
-             raise ValueError(f"{label}은 {maximum}자 이내로 입력해 주세요.")
-     return result
+diff --git a/cafe.py b/cafe.py
+index 11f4859..f33bdde 100644
+--- a/cafe.py
++++ b/cafe.py
+@@ -72,7 +72,7 @@ def run():
+             points = points - use + jeoklip
+             a["points"] = str(points)
+             a["total"] = str(int(a["total"]) + gyeolje)
+-            if int(a["total"]) > VIP_GIJUN:
++            if int(a["total"]) >= VIP_GIJUN:
+                 a["grade"] = "VIP"
+             maechul = maechul + gyeolje
+             jeoklip_hap = jeoklip_hap + jeoklip
 ```
 
 ## Claude가 만든 `tests/test_bugs.py`
 
 ```python
-"""고친 버그의 회귀 테스트. 이슈의 입력을 그대로 써요."""
+"""이슈별 회귀 테스트. 이슈에 적힌 입력을 그대로 써요."""
 import unittest
 
-from tests import test_guestbook
+from tests.cafe_runner import run_cafe
 
 
-class BugTest(test_guestbook.GuestbookTest):
-    def test_이슈1_이름을_딱_40자로_쓰면_저장된다(self):
-        status, body = self.post("가" * 40, "안녕하세요")
-        self.assertEqual(status, 201)
-        self.assertEqual(body["entry"]["name"], "가" * 40)
-
-    def test_이슈1_이름이_41자면_400(self):
-        status, body = self.post("가" * 41, "안녕하세요")
-        self.assertEqual(status, 400)
-        self.assertIn("40자", body["error"])
+class Issue1Test(unittest.TestCase):
+    def test_누적이_딱_10만원이_되면_VIP가_된다(self):
+        # 이슈 #1: 김하늘 님(M001)은 누적 95,000원이었고 오늘 5,000원을 냈다.
+        result = run_cafe(["2026-10-17,M001,5000,0"])
+        self.assertEqual(result.code, 0, result.output)
+        self.assertEqual(result.members["M001"]["total"], "100000")
+        self.assertEqual(result.members["M001"]["grade"], "VIP")
+        self.assertNotIn("VIP까지", result.output)
 
 
 if __name__ == "__main__":
     unittest.main()
 ```
+
+## 볼 곳
+
+- `cafe.py`에서 기호 하나(`>`를 `>=`로)만 바뀌었어요.
+- 고치기 전 코드에서 새 테스트가 `'일반' != 'VIP'`로 실패하는 것을 먼저 보여 줬어요. 고친 뒤에는 테스트 4개가 모두 통과했어요.
+- 영수증을 다시 눈으로 보지는 않았다고 스스로 밝혔어요. 이럴 때는 `py cafe.py`로 한 번 더 돌려 봐요.

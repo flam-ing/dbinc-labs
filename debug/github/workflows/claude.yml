@@ -45,4 +45,4 @@ jobs:
           label_trigger: autofix
           claude_args: |
             --max-turns 30
-            --allowedTools "Bash(python3 -m unittest),Bash(python3 -m unittest *),Bash(python -m unittest),Bash(python -m unittest *),Bash(python3 app.py *),Bash(curl *)"
+            --allowedTools "Bash(python3 -m unittest),Bash(python3 -m unittest *),Bash(python -m unittest),Bash(python -m unittest *),Bash(python3 cafe.py),Bash(python cafe.py),Bash(git diff *)"

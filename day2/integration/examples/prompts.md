@@ -127,6 +127,6 @@ query_events를 next_offset이 null이 될 때까지 읽고, 서비스별 요청
 `gh`가 로그인돼 있으면 CLI 길도 해 봐요.
 
 ```text
-gh로 GitHub 저장소 <강사아이디>/guestbook-oncall의 최근 이슈 5개를 표로 보여 줘(번호, 제목, 상태).
+gh로 GitHub 저장소 flam-ing/cafe-points-oncall의 최근 이슈 5개를 표로 보여 줘(번호, 제목, 상태).
 gh가 없거나 로그인이 안 돼 있으면 설치나 로그인을 하지 말고 나에게 알려 줘. 이슈를 만들거나 닫지 마.
 ```

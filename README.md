@@ -15,8 +15,8 @@
 | `labs/app` | 1일차 번외 | 내 방명록에 복사하는 PWA 파일 `pwa/`와 크롬 확장 `extension/`, 강사 예제 `serve.py` | `python3 labs/app/check_app.py` |
 | `labs/legacy-easy` | 1일차 5교시, 2일차 1~3교시(번외 실습 2와 7교시 실습 1에서도 같은 폴더를 열어요) | 카페 포인트 `cafe-points/`, 위키 묶음 `cafe-points-wiki/`(1일차 5교시 실습 6, 2일차 2교시 실습 2), 재미로 해 보는 카톡 대화 `kakao-sample/` | 사본에서 `python3 cafe.py` |
 | `labs/rules` | 2일차 3교시 | 규칙 세 줄, 스킬, 테스트, 훅의 실제 결과(`examples/made-by-claude/cafe-points/`) | 없음 |
-| `labs/debug` | 2일차 4교시 | 버그 네 개가 든 방명록, 온콜 워크플로, 강사 저장소를 만드는 `tools/make_repo.py` | `cd labs/debug` 뒤 `python3 -m unittest` |
-| `labs/harness` | 2일차 번외 | 배포 전 변경 목록 `compare/changes.md`, 설계서 양식 `design/agent-design.md` | 없음 |
+| `labs/debug` | 2일차 4교시 | 버그 네 개가 든 카페 포인트 코드, 온콜 워크플로, 강사 저장소를 만드는 `tools/make_repo.py` | `cd labs/debug` 뒤 `python3 -m unittest` |
+| `labs/harness` | 2일차 번외 | 배포 전 변경 목록 `compare/changes.md`(실습 1·3), 예전 판의 설계서 양식 `design/` | 없음 |
 | `labs/day2/cli` | 2일차 5교시 | 강사가 미리 만든 방명록 CLI 결과, 막혔을 때 쓰는 `gb_example.py`, 권한 규칙 예시 | 없음 |
 | `labs/crawl-once` | 2일차 6교시 | Claude가 실제로 만든 `crawl.py`와 답 | 없음 |
 | `labs/quant` | 2일차 6교시 | 비트코인 일봉과 공포·탐욕 지수 사본 `snapshot/`, 실제 결과 | 없음 |
@@ -38,7 +38,7 @@
 | 1일차 3교시 | 바탕화면 `my-game` | 빈 폴더를 만들어요 |
 | 1일차 4교시, 번외 | `~/dbinc-work/<내 주제>` | `labs/guestbook/starter`를 복사해요. 숨은 `.claude` 폴더도 같이 와야 해요 |
 | 1일차 5교시, 2일차 1~3교시 | `~/legacy/cafe-points` | `labs/legacy-easy/cafe-points`를 복사해요 |
-| 2일차 4교시 | `~/dbinc-debug` | 강사 저장소를 받거나 `labs/debug`를 복사해요 |
+| 2일차 4교시 | `~/cafe-points-oncall` | 강사 저장소를 받거나 `labs/debug`에서 `py tools/make_repo.py`로 만들어요 |
 | 2일차 5교시 | 1일차 4교시 방명록 폴더 | 없으면 `labs/guestbook`을 그 자리에서 열어요 |
 | 2일차 6교시 | 빈 폴더 `dbinc-crawl`, `dbinc-quant` | 수업 중에 만들어요 |
 
@@ -50,7 +50,7 @@
 | --- | --- |
 | 5173 | 방명록 화면 React(Vite), 1일차 4교시와 번외 |
 | 8080 | 방명록 서버 Spring Boot, 1일차 4교시와 번외 |
-| 8000 | 참고 방명록 `labs/guestbook/app.py`, 강사 예제 `labs/app/serve.py`, 버그 방명록 `labs/debug/app.py`. 한 번에 하나만 켜요 |
+| 8000 | 참고 방명록 `labs/guestbook/app.py`, 강사 예제 `labs/app/serve.py`. 한 번에 하나만 켜요 |
 
 ## 1일차 3교시 · 게임
 
@@ -104,16 +104,16 @@ python3 cafe.py
 
 `examples/`와 `_reference/`는 복사하지 않아요. 안내는 [쉬운 레거시 README](legacy-easy/README.md)에 있어요.
 
-## 2일차 4교시 · 버그 네 개 방명록
+## 2일차 4교시 · 버그 네 개 카페 포인트
 
-`labs/debug`는 1일차 방명록에 버그를 네 개 넣은 폴더예요. 강사가 이 폴더로 강사 저장소를 만들어요. 받은 직후에는 테스트 3개가 통과해요. 버그를 잡는 테스트가 아직 없어서 그래요.
+`labs/debug`는 1일차 카페 포인트 코드와 같은 프로그램에 버그를 네 개 넣은 폴더예요. 오전 `~/legacy/cafe-points`와는 따로 받아요. 강사가 이 폴더로 강사 저장소를 만들어요. 받은 직후에는 테스트 3개가 통과해요. 버그를 잡는 테스트가 아직 없어서 그래요.
 
 ```text
 cd labs/debug
 python3 -m unittest
 ```
 
-강사 저장소를 만드는 순서와 이슈를 올리는 시각은 [디버깅 README](debug/README.md)에 있어요.
+강사 저장소를 만드는 순서와 이슈를 올리는 시각은 [강사용 README](debug/_reference/README.md)에 있어요.
 
 ## 그 밖의 폴더
 

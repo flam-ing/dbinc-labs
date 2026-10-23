@@ -1,6 +1,6 @@
 # 루틴에 넣을 요청문
 
-claude.ai/code/routines(또는 데스크톱 앱 왼쪽의 Routines)에서 **New routine**을 누르고, 아래 "요청문" 상자의 글을 통째로 붙여 넣어요. `<내 저장소>`는 두 군데(첫 줄과 1번 줄)에 있어요. 둘 다 내 저장소 이름(예: `내아이디/guestbook-oncall`)으로 바꿔요.
+claude.ai/code/routines(또는 데스크톱 앱 왼쪽의 Routines)에서 **New routine**을 누르고, 아래 "요청문" 상자의 글을 통째로 붙여 넣어요. `<내 저장소>`는 두 군데(첫 줄과 1번 줄)에 있어요. 둘 다 내 저장소 이름(예: `flam-ing/cafe-points-oncall`)으로 바꿔요.
 
 루틴은 사람이 없을 때 혼자 돌아요. 그래서 요청문 하나만 읽고도 무엇을 하고 언제 멈출지 알 수 있게 썼어요.
 
@@ -17,7 +17,7 @@ claude.ai/code/routines(또는 데스크톱 앱 왼쪽의 Routines)에서 **New 
 1. 열린 이슈 중 autofix 라벨이 붙은 것을 찾아. 내장 GitHub 도구를 쓰고, 안 되면 gh api "repos/<내 저장소>/issues?labels=autofix&state=open"을 써. gh issue, gh pr 명령은 이 환경에서 막혀 있으니 쓰지 마.
 2. 그런 이슈가 없으면 파일을 바꾸지 말고 "처리할 이슈 없음" 한 줄만 남기고 바로 끝내.
 3. 있으면 번호가 가장 작은 이슈 하나만 처리해. 그 이슈를 가리키는 열린 PR이 이미 있으면 건너뛰고 끝내.
-4. CLAUDE.md를 읽고 규칙을 따라. 이슈의 재현 순서대로 재현해. 화면은 브라우저 대신 코드와 요청으로 확인해도 돼. 재현되지 않으면 고치지 말고, 실행한 명령과 결과를 이슈 댓글로 남기고 끝내.
+4. CLAUDE.md를 읽고 규칙을 따라. 이슈의 재현 순서대로 재현해. 주문 줄을 더해야 하면 data/ 원본 대신 tests/cafe_runner.py의 run_cafe를 써. 재현되지 않으면 고치지 말고, 실행한 명령과 결과를 이슈 댓글로 남기고 끝내.
 5. 원인 줄만 고치고, 이슈의 입력을 그대로 쓴 회귀 테스트를 tests/test_bugs.py에 더해. 기존 테스트는 고치지 마.
 6. python -m unittest에 실패가 없으면 claude/issue-<번호> 브랜치에 커밋하고 push한 뒤 PR을 만들어. 제목과 본문은 CLAUDE.md의 PR 규칙을 따라.
 7. 이슈에 PR 주소를 댓글로 남기고, 그 이슈에서 autofix 라벨을 떼. 다음 실행이 같은 이슈를 다시 집지 않게 하려는 거야.
@@ -30,7 +30,7 @@ claude.ai/code/routines(또는 데스크톱 앱 왼쪽의 Routines)에서 **New 
 
 | 칸 | 고를 값 | 이유 |
 | --- | --- | --- |
-| 이름 | `guestbook-oncall 이슈 처리` | 목록에서 찾기 쉽게 |
+| 이름 | `cafe-points-oncall 이슈 처리` | 목록에서 찾기 쉽게 |
 | 저장소 | 강사 저장소 하나 | 루틴이 손댈 수 있는 범위를 좁혀요 |
 | 환경 | Default | Python이 들어 있어요. 따로 받을 패키지가 없어요 |
 | 트리거 | Schedule, 매시간(hourly) | 루틴은 "이슈가 열림"을 바로 받지 못해서 매시간 확인해요 |

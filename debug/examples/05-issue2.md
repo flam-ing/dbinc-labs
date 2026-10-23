@@ -1,99 +1,93 @@
-# 5. 이슈 #2를 한 번에: 실제로 나온 답
+# 5. 이슈 #2를 문장 하나로: 실제로 나온 답
 
-이슈 #1을 고친 사본에서, 이슈 #2(DB, 작은따옴표)를 문장 하나로 맡긴 실제 답이에요. 실습에서는 1~3번처럼 세 번에 나눠 보내도 되고, 시간이 빠듯하면 이 문장 하나로 보내요([prompts.md](prompts.md) 4번).
+이슈 #1을 고친 사본(커밋 전)에서 새 세션을 열고, 이슈 #2(적립, VIP 1%)를 실습 2의 문장 하나로 맡긴 실제 답이에요.
 
 | 항목 | 값 |
 | --- | --- |
-| 날짜 | 2026-10-17 |
-| Claude Code | 2.1.302 |
+| 날짜 | 2026-10-23 |
+| Claude Code | 2.1.309 |
 | 모델 | Sonnet 5.5 |
 | 모드 | Auto |
-| 걸린 시간 | 26초 |
+| 걸린 시간 | 29초 |
 
 ## 보낸 말
 
 ```text
-아래 이슈를 재현하고 원인 줄을 찾아서 그 줄만 고쳐 줘. 이슈 입력 그대로 회귀 테스트를 tests/test_bugs.py에 더하고, 고치기 전에는 실패하는지 먼저 보여 줘. 끝나면 python3 -m unittest 결과를 그대로 보여 줘.
+아래 이슈를 재현하고 원인 줄을 찾아서 그 줄만 고쳐 줘. 테스트도 하나 더해 줘.
 
-#2 [DB] 내용에 작은따옴표(')가 있으면 저장이 안 돼요
+#2 [적립] VIP인데 포인트가 1%만 쌓여요
 
 ※ 교육용으로 일부러 넣은 버그예요.
 
 ## 재현 순서
 
-1. `python3 app.py`로 서버를 켜고 http://127.0.0.1:8000 을 열어요.
-2. 이름에 `김디비`, 내용에 `오늘 회의 '정말' 좋았어요`를 쓰고 **남기기**를 눌러요.
+1. 받은 그대로 `py cafe.py`로 마감을 돌려요. Mac은 `python3 cafe.py`예요.
+2. 영수증에서 이바다 님(VIP) 줄을 봐요. 12,000원 주문에 포인트 2,000점을 써서 10,000원을 냈어요.
 
 ## 기대
 
-저장되고 목록에 나와요.
+VIP는 결제 금액의 3%라서 300점이 쌓여요.
 
 ## 실제
 
-"저장하지 못했습니다. 다시 시도해 주세요."가 떠요. 따옴표를 빼면 저장돼요.
+영수증에 "적립: 100 점"이 찍혀요. 일반 회원처럼 1%만 쌓였어요.
 ```
 
 ## Claude의 답 (그대로)
 
-이슈 #2를 고쳤습니다. 내용에 작은따옴표(')가 있어도 저장되고 목록에 나옵니다.
+이슈 #2는 고쳤고, `python3 -m unittest` 5개가 모두 통과했습니다.
 
 **재현**
-- 기대: `김디비` / `오늘 회의 '정말' 좋았어요`가 저장되고 목록에 나온다.
-- 실제: 서버가 500을 돌려줘서 화면에 "저장하지 못했습니다."가 뜬다.
-- 브라우저는 열지 않고, 같은 입력을 테스트 서버로 보내서 재현했습니다.
+- 기대: 이바다 님(VIP) 결제 10,000원의 3%인 300점이 쌓입니다.
+- 실제: 영수증에 "적립: 100 점"이 찍혔고, 남은 포인트는 3,200점이었습니다.
 
 **원인**
-- `app.py:99-100`에서 이름, 내용, 시각을 f-string으로 SQL 문장에 그대로 끼워 넣고 있었습니다.
-- 내용의 `'`가 SQL 문자열을 중간에 닫아서 `sqlite3.Error`가 났고, 이 오류가 500 응답으로 이어졌습니다.
+- `cafe.py:33`의 `if grade == "vip":`가 원인입니다.
+- 명부와 `cafe.py`는 등급을 `"VIP"`(대문자)로 쓰는데 여기만 소문자로 비교했습니다.
+- 그래서 조건이 항상 거짓이 되어 VIP도 1% 계산으로 빠졌습니다.
 
-**고친 줄**
-- 값을 `?` 자리표시자로 바꾸고 튜플로 따로 넘겼습니다. 이 줄만 바꿨습니다.
+**바꾼 줄**
+- `cafe.py:33`: `"vip"`를 `"VIP"`로 바꿨습니다. 이 줄만 고쳤습니다.
 
-```diff
--                    "INSERT INTO entries(name, message, created_at) "
--                    f"VALUES ('{entry['name']}', '{entry['message']}', '{entry['created_at']}')"
-+                    "INSERT INTO entries(name, message, created_at) VALUES (?, ?, ?)",
-+                    (entry["name"], entry["message"], entry["created_at"]),
-```
+**테스트**
+- `tests/test_bugs.py`에 `Issue2Test`를 더했습니다.
+- 입력은 이슈 그대로 `2026-10-17,M002,12000,2000`입니다.
+- "적립: 300 점"이 찍히는지와 남은 포인트가 3,400점(5,100 − 2,000 + 300)인지 확인합니다.
+- 고치기 전 코드에서는 "적립: 100 점"이 나와 실패했고, 고친 뒤에는 통과했습니다.
 
-**회귀 테스트**
-- `tests/test_bugs.py`에 `test_이슈2_내용에_작은따옴표가_있어도_저장된다`를 더했습니다. 이슈의 입력을 그대로 쓰고, 응답이 201인지와 목록에 같은 내용이 나오는지 확인합니다.
-- 고치기 전 코드에서는 이 테스트가 `AssertionError: 500 != 201`로 실패했습니다.
+**참고**
+- 작업 폴더에는 제가 건드리지 않은 변경이 이미 있었습니다. `cafe.py:75`의 `>`를 `>=`로 바꾼 것으로, 이슈 #1 수정으로 보입니다. 그대로 두었습니다.
+- 커밋하거나 PR을 만들지는 않았습니다. 필요하면 말씀해 주세요.
+- 이슈 #1 수정과 이번 수정이 같은 작업 트리에 섞여 있어서, PR을 나눌지 먼저 정하시면 좋겠습니다.
 
-**`python3 -m unittest` 결과(고친 뒤)**
-```
-.........
-----------------------------------------------------------------------
-Ran 9 tests in 1.046s
-
-OK
-```
-
-브라우저에서 직접 눌러 보지는 않았습니다. 확인하려면 `python3 app.py`로 서버를 켜고 http://127.0.0.1:8000 에서 이슈의 입력으로 **남기기**를 눌러 보세요.
-
-커밋, 브랜치, PR은 만들지 않았습니다. 필요하면 말씀해 주세요.
-
-## 바뀐 줄 (`git diff`)
+## 바뀐 줄 (`git diff`, 위 조각이 이번 수정이에요. 아래 조각은 #1 수정이에요)
 
 ```diff
-diff --git a/app.py b/app.py
-index 7f3c98a..05fe8c8 100644
---- a/app.py
-+++ b/app.py
-@@ -96,8 +96,8 @@ class GuestbookHandler(BaseHTTPRequestHandler):
-         try:
-             with sqlite3.connect(self.server.db_path) as db:
-                 cursor = db.execute(
--                    "INSERT INTO entries(name, message, created_at) "
--                    f"VALUES ('{entry['name']}', '{entry['message']}', '{entry['created_at']}')"
-+                    "INSERT INTO entries(name, message, created_at) VALUES (?, ?, ?)",
-+                    (entry["name"], entry["message"], entry["created_at"]),
-                 )
-                 entry["id"] = cursor.lastrowid
-             return self.respond(201, {"entry": entry})
+diff --git a/cafe.py b/cafe.py
+index 11f4859..7a1dd80 100644
+--- a/cafe.py
++++ b/cafe.py
+@@ -30,7 +30,7 @@ def save_members(members):
+ 
+ def jeoklip_gyesan(gyeolje, grade):
+     # 결제 금액의 1%를 쌓아요. VIP는 3%예요. 1점 미만은 버려요.
+-    if grade == "vip":
++    if grade == "VIP":
+         return gyeolje * 3 // 100
+     return gyeolje * 1 // 100
+ 
+@@ -72,7 +72,7 @@ def run():
+             points = points - use + jeoklip
+             a["points"] = str(points)
+             a["total"] = str(int(a["total"]) + gyeolje)
+-            if int(a["total"]) > VIP_GIJUN:
++            if int(a["total"]) >= VIP_GIJUN:
+                 a["grade"] = "VIP"
+             maechul = maechul + gyeolje
+             jeoklip_hap = jeoklip_hap + jeoklip
 ```
 
 ## 볼 곳
 
-- 따옴표를 바꿔 넣는 식으로 고치지 않고, 값 자리를 `?`로 바꿔 따로 넘겼어요. 같은 원인이 SQL 주입 구멍이라서 이렇게 고쳐야 해요.
-- 고치기 전 코드에서 새 테스트가 `500 != 201`로 실패한 것을 먼저 보여 줬어요.
+- 원인 줄이 `cafe.py:33` 한 곳이에요. 소문자 `"vip"`를 대문자 `"VIP"`로 바꿨어요.
+- 작업 폴더에 이미 있던 #1 수정을 건드리지 않고 그대로 두었다고 알려 줬어요. 다음 실습에서 이슈마다 커밋을 나눠요.
