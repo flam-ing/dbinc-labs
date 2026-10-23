@@ -23,6 +23,14 @@ DB Inc 사내 Claude Code 2일 과정의 실습 파일이에요. 강의 사이�
 | 실습 문장과 Claude 답 | 2일차 4교시 | [debug/examples](debug/examples) |
 | 수강생이 받는 강사 저장소 | 2일차 4교시 | [flam-ing/cafe-points-oncall](https://github.com/flam-ing/cafe-points-oncall) |
 
+## 회의실 예약 (사내 연동 · 리버스 엔지니어링)
+
+| 무엇 | 쓰는 교시 | 주소 |
+| --- | --- | --- |
+| 로그인이 있는 연습용 사내 툴 | 2일차 5교시 | [roombook](roombook) |
+| 화면에서만 막는 규칙 (`RULES`) | 2일차 5교시 따라 하기 C | [roombook/static/app.js](roombook/static/app.js) |
+| 서버 코드 (읽기 한도 429) | 2일차 5교시 | [roombook/app.py](roombook/app.py) |
+
 ## 교시별 폴더
 
 자세한 표는 [README.md](README.md)에 있어요.
