@@ -2,7 +2,7 @@
 
 가상 서비스의 이벤트 기록을 집계하는 작은 Python 프로그램이에요. 이벤트는 모두 수업을 위해 만든 가상 데이터예요.
 
-2일차 수업은 대부분 다른 폴더로 해요. 이 폴더에서 수업 중에 보는 것은 5교시 [사내 시스템 연동](../../docs/day2-integration.md)의 CLI 결과 견본([cli/](cli/README.md))뿐이에요. 나머지는 수업 뒤에 혼자 해 보는 연습이에요.
+2일차 수업은 대부분 다른 폴더로 해요. 이 폴더에서 수업 중에 보는 것은 5교시 [사내 시스템 연동](../../docs/day2-integration.md)의 문장 모음([integration/examples/prompts.md](integration/examples/prompts.md))뿐이에요. 나머지는 수업 뒤에 혼자 해 보는 연습이에요.
 
 | 교시 | 쓰는 폴더 |
 | --- | --- |
@@ -10,7 +10,7 @@
 | 3교시 지침, 스킬, TDD와 훅 | [labs/rules](../rules/README.md) |
 | 4교시 디버깅 | [labs/debug](../debug/README.md) |
 | 번외 모델·하네스·에이전트 | [labs/harness](../harness/README.md) |
-| 5교시 사내 시스템 연동 | 어제 만든 방명록 폴더나 [labs/guestbook](../guestbook/README.md). 문장은 [integration/examples/prompts.md](integration/examples/prompts.md) |
+| 5교시 사내 시스템 연동 | [labs/roombook](../roombook/README.md). 문장은 [integration/examples/prompts.md](integration/examples/prompts.md) |
 | 6교시 크롤링, 퀀트 | [labs/crawl-once](../crawl-once/README.md), [labs/quant](../quant/README.md) |
 
 환경 만들기, 명령마다 나오는 출력, 막혔을 때 볼 표는 [2일차 실습 자료](../../docs/day2-labs.md)에 자세히 있어요.
@@ -24,7 +24,7 @@
 | `starter/`, `buggy/`, `reference/` | 테스트 먼저 연습의 시작 파일, 버그가 든 파일, 정답이에요. 원본이라 고치지 않아요. 정답은 연습 중에 열지 않아요 |
 | `tests/` | 계약 테스트 44개(`test_contract.py`)와 내가 테스트를 더하는 파일 |
 | `server.py` | 가상 사내 시스템 MCP 서버. 읽기 도구 2개 |
-| `cli/` | 방명록 CLI 예시와 5교시 결과 견본 |
+| `cli/` | 예전 판 5교시의 방명록 CLI 예시와 결과 견본(수업 뒤 연습용) |
 | `integration/` | MCP와 SDK 연습의 예시 문장과 실제 답, 연결 약속(`CONTRACT.md`) |
 | `hooks/` | 테스트를 강제하는 훅 예시 |
 | `fixtures/examples/` | 집계 함수 버그를 재현하고 고치는 연습의 예시 |

@@ -11,13 +11,14 @@
 | `labs/agent-intro` | 1일차 1교시 | 챗봇에 올리는 `orders.csv`(가상 주문 5건, 합계 89,000원) | 없음 |
 | `labs/setup` | 1일차 2교시 | 보내는 말과 실제 답(`examples/`) | 없음 |
 | `labs/game-kit`, `labs/onepager` | 1일차 3교시 | 견본 게임 `game-kit/examples/sample-game/`, 미리 만든 미디어 세트, 완성 예시 게임 `onepager/game/` | `python3 labs/onepager/check.py labs/onepager/game` |
-| `labs/guestbook` | 1일차 4교시, 2일차 5교시 | 4교시 시작 폴더 `starter/`(인터뷰 스킬 `prd-interview`), 참고 방명록, 확인 도구 | `python3 labs/guestbook/smoke_test.py` |
+| `labs/guestbook` | 1일차 4교시 | 4교시 시작 폴더 `starter/`(인터뷰 스킬 `prd-interview`), 참고 방명록, 확인 도구 | `python3 labs/guestbook/smoke_test.py` |
 | `labs/app` | 1일차 번외 | 내 방명록에 복사하는 PWA 파일 `pwa/`와 크롬 확장 `extension/`, 강사 예제 `serve.py` | `python3 labs/app/check_app.py` |
 | `labs/legacy-easy` | 1일차 5교시, 2일차 1~3교시(번외 실습 2와 7교시 실습 1에서도 같은 폴더를 열어요) | 카페 포인트 `cafe-points/`, 위키 묶음 `cafe-points-wiki/`(1일차 5교시 실습 6, 2일차 2교시 실습 2), 재미로 해 보는 카톡 대화 `kakao-sample/` | 사본에서 `python3 cafe.py` |
 | `labs/rules` | 2일차 3교시 | 규칙 세 줄, 스킬, 테스트, 훅의 실제 결과(`examples/made-by-claude/cafe-points/`) | 없음 |
 | `labs/debug` | 2일차 4교시 | 버그 네 개가 든 카페 포인트 코드, 온콜 워크플로, 강사 저장소를 만드는 `tools/make_repo.py` | `cd labs/debug` 뒤 `python3 -m unittest` |
 | `labs/harness` | 2일차 번외 | 배포 전 변경 목록 `compare/changes.md`(실습 1·3), 예전 판의 설계서 양식 `design/` | 없음 |
-| `labs/day2/cli` | 2일차 5교시 | 강사가 미리 만든 방명록 CLI 결과, 막혔을 때 쓰는 `gb_example.py`, 권한 규칙 예시 | 없음 |
+| `labs/roombook` | 2일차 5교시 | 로그인이 있는 연습용 사내 툴 회의실 예약. `py app.py`로 켜요(포트 8010). 강사용 정답 견본과 실행 기록은 `_reference/`(ZIP에 없음) | `python3 labs/roombook/smoke_test.py`(11/11 통과) |
+| `labs/day2/cli` | 수업 뒤 연습 | 예전 판 5교시의 방명록 CLI 결과, `gb_example.py`, 권한 규칙 예시 | 없음 |
 | `labs/crawl-once` | 2일차 6교시 | Claude가 실제로 만든 `crawl.py`와 답 | 없음 |
 | `labs/quant` | 2일차 6교시 | 비트코인 일봉과 공포·탐욕 지수 사본 `snapshot/`, 실제 결과 | 없음 |
 | `labs/tdd` | 수업 뒤에 해 볼 것 | 3교시에 해 본 테스트 먼저와 훅을 다른 예제로 한 번 더 해 보는 자료 | [README](tdd/README.md) |
@@ -39,7 +40,7 @@
 | 1일차 4교시, 번외 | `~/dbinc-work/<내 주제>` | `labs/guestbook/starter`를 복사해요. 숨은 `.claude` 폴더도 같이 와야 해요 |
 | 1일차 5교시, 2일차 1~3교시 | `~/legacy/cafe-points` | `labs/legacy-easy/cafe-points`를 복사해요 |
 | 2일차 4교시 | `~/cafe-points-oncall` | 강사 저장소를 받거나 `labs/debug`에서 `py tools/make_repo.py`로 만들어요 |
-| 2일차 5교시 | 1일차 4교시 방명록 폴더 | 없으면 `labs/guestbook`을 그 자리에서 열어요 |
+| 2일차 5교시 | `labs/roombook` | 그 자리에서 열어요. 서버는 PowerShell 창에서 `py app.py`로 켜요 |
 | 2일차 6교시 | 빈 폴더 `dbinc-crawl`, `dbinc-quant` | 수업 중에 만들어요 |
 
 복사는 탐색기나 Finder로 해도 되고, Claude에게 부탁해도 돼요.
@@ -51,6 +52,7 @@
 | 5173 | 방명록 화면 React(Vite), 1일차 4교시와 번외 |
 | 8080 | 방명록 서버 Spring Boot, 1일차 4교시와 번외 |
 | 8000 | 참고 방명록 `labs/guestbook/app.py`, 강사 예제 `labs/app/serve.py`. 한 번에 하나만 켜요 |
+| 8010 | 회의실 예약 `labs/roombook/app.py`, 2일차 5교시 |
 
 ## 1일차 3교시 · 게임
 

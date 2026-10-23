@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>회의실 예약</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <strong>회의실 예약</strong>
+    <nav>
+      <button data-tab="rooms" class="active">회의실 현황</button>
+      <button data-tab="list">예약 목록</button>
+      <button data-tab="book">예약 만들기</button>
+      <button data-tab="people">직원 찾기</button>
+    </nav>
+    <span id="me"></span>
+    <form method="post" action="/logout"><button class="link">로그아웃</button></form>
+  </header>
+
+  <main>
+    <p id="message" class="message" hidden></p>
+
+    <section id="tab-rooms" class="tab">
+      <h2>오늘 회의실 현황</h2>
+      <div id="rooms" class="room-grid"></div>
+    </section>
+
+    <section id="tab-list" class="tab" hidden>
+      <h2>예약 목록</h2>
+      <div class="filters">
+        <label>날짜 <input type="date" id="list-date"></label>
+        <label><input type="checkbox" id="list-mine"> 내 예약만</label>
+      </div>
+      <table class="list">
+        <thead><tr><th>번호</th><th>날짜</th><th>시간</th><th>회의실</th><th>제목</th><th>예약한 사람</th><th></th></tr></thead>
+        <tbody id="list-body"></tbody>
+      </table>
+      <div class="pager">
+        <button id="prev">이전</button>
+        <span id="page-info"></span>
+        <button id="next">다음</button>
+      </div>
+    </section>
+
+    <section id="tab-book" class="tab" hidden>
+      <h2>예약 만들기</h2>
+      <form id="book-form" class="book">
+        <label>회의실 <select id="book-room" required></select></label>
+        <label>날짜 <input type="date" id="book-date" required></label>
+        <label>시작 <select id="book-start" required></select></label>
+        <label>끝 <select id="book-end" required></select></label>
+        <label>제목 <input id="book-title" required></label>
+        <button type="submit">예약하기</button>
+      </form>
+      <ul class="hint">
+        <li>평일 09:00~19:00에 30분 단위로 예약해요.</li>
+        <li>한 번에 2시간까지, 한 사람이 하루 2건까지 예약해요.</li>
+        <li>제목은 30자까지 적어요.</li>
+      </ul>
+    </section>
+
+    <section id="tab-people" class="tab" hidden>
+      <h2>직원 찾기</h2>
+      <input id="people-q" placeholder="이름이나 팀을 두 글자 이상 적어 주세요">
+      <table class="list">
+        <thead><tr><th>이름</th><th>팀</th><th>전화</th><th>메일</th></tr></thead>
+        <tbody id="people-body"></tbody>
+      </table>
+      <p id="people-info" class="hint"></p>
+    </section>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
