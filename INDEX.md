@@ -14,6 +14,15 @@ DB Inc 사내 Claude Code 2일 과정의 실습 파일이에요. 강의 사이�
 | 리팩토링한 뒤의 코드 | 2일차 1교시 | [legacy-easy/examples/after-refactor](legacy-easy/examples/after-refactor) |
 | 실습 문장 모음 | 전체 | [legacy-easy/examples/prompts.md](legacy-easy/examples/prompts.md) |
 
+## 카페 포인트 (디버깅)
+
+| 무엇 | 쓰는 교시 | 주소 |
+| --- | --- | --- |
+| 버그 네 개를 넣은 카페 포인트 | 2일차 4교시 디버깅 | [debug](debug) |
+| 버그가 든 `cafe.py` (33, 61, 69, 75행) | 2일차 4교시 | [debug/cafe.py](debug/cafe.py) |
+| 실습 문장과 Claude 답 | 2일차 4교시 | [debug/examples](debug/examples) |
+| 수강생이 받는 강사 저장소 | 2일차 4교시 | [flam-ing/cafe-points-oncall](https://github.com/flam-ing/cafe-points-oncall) |
+
 ## 교시별 폴더
 
 자세한 표는 [README.md](README.md)에 있어요.
